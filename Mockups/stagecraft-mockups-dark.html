@@ -1,0 +1,3374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Stagecraft — UI Mockups (Dark)</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0e0e12;
+            color: #e8e6f0;
+            min-height: 100vh;
+        }
+
+        /* ── Dark color tokens ── */
+        :root {
+            /* Surfaces */
+            --bg0: #0e0e12; /* page bg */
+            --bg1: #16151f; /* app shell / sidebar base */
+            --bg2: #1e1c2a; /* main panel bg */
+            --bg3: #252336; /* card bg */
+            --bg4: #2e2b42; /* elevated card / hover */
+            --bg5: #38354f; /* input bg / chip bg */
+
+            /* Borders */
+            --bdr: rgba(255, 255, 255, 0.07);
+            --bdr2: rgba(255, 255, 255, 0.13);
+
+            /* Text */
+            --tx1: #f0eeff; /* primary */
+            --tx2: #9e9bb8; /* secondary */
+            --tx3: #5f5d78; /* tertiary/hint */
+
+            /* Purple accent */
+            --p900: #26215C;
+            --p800: #3C3489;
+            --p600: #534AB7;
+            --p400: #7F77DD;
+            --p300: #9E97E6;
+            --p200: #AFA9EC;
+            --p100: #CECBF6;
+            --p50: #1e1c35;
+            /* Green accent */
+            --g700: #1e3d09;
+            --g600: #3B6D11;
+            --g400: #639922;
+            --g300: #7cb82a;
+            --g200: #97C459;
+            --g100: #C0DD97;
+            --g50: #141f09;
+            /* Pink accent */
+            --pk700: #4a1528;
+            --pk600: #993556;
+            --pk400: #D4537E;
+            --pk300: #dc6e91;
+            --pk200: #ED93B1;
+            --pk100: #F4C0D1;
+            --pk50: #1e0d15;
+            /* Amber */
+            --a600: #854F0B;
+            --a400: #BA7517;
+            --a300: #d08a25;
+            --a100: #FAC775;
+            --a50: #1e1505;
+            /* Coral */
+            --c600: #993C1D;
+            --c400: #D85A30;
+            --c100: #F5C4B3;
+            --c50: #1e0e07;
+
+            --radius: 10px;
+            --radius-sm: 6px;
+        }
+
+        /* ── Nav bar ── */
+        .nav {
+            display: flex;
+            gap: 4px;
+            padding: 14px 24px 0;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--bdr);
+            background: var(--bg1);
+        }
+
+        .nav-tab {
+            padding: 8px 16px;
+            font-size: 13px;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            color: var(--tx2);
+            border: 1px solid transparent;
+            border-bottom: none;
+            background: transparent;
+            transition: background 0.12s;
+            user-select: none;
+        }
+
+        .nav-tab.active {
+            background: var(--bg2);
+            color: var(--p300);
+            border-color: var(--bdr);
+            font-weight: 600;
+            margin-bottom: -1px;
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: var(--bg2);
+            color: var(--tx1);
+        }
+
+        .screen {
+            display: none;
+            padding: 20px 24px 24px;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* ── App shell ── */
+        .app-shell {
+            display: flex;
+            height: 640px;
+            background: var(--bg0);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--bdr2);
+            box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 220px;
+            min-width: 220px;
+            background: var(--bg1);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--bdr);
+        }
+
+        .sb-header {
+            padding: 20px 18px 16px;
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        .sb-appname {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--tx1);
+            letter-spacing: 0.02em;
+        }
+
+        .sb-appsub {
+            font-size: 11px;
+            color: var(--tx3);
+            margin-top: 2px;
+        }
+
+        .sb-section {
+            padding: 14px 0 0;
+        }
+
+        .sb-label {
+            font-size: 10px;
+            color: var(--tx3);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 0 18px 6px;
+            font-weight: 600;
+        }
+
+        .sb-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            font-size: 13px;
+            color: var(--tx2);
+            cursor: pointer;
+            border-right: 2px solid transparent;
+        }
+
+        .sb-item:hover {
+            color: var(--tx1);
+            background: var(--bg2);
+        }
+
+        .sb-item.active {
+            background: rgba(127, 119, 221, 0.15);
+            color: var(--p200);
+            border-right-color: var(--p400);
+        }
+
+        .show-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 3px 10px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: transparent;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .show-pill:hover {
+            background: var(--bg2);
+        }
+
+        .show-pill.active {
+            background: rgba(99, 153, 34, 0.12);
+            border-color: rgba(99, 153, 34, 0.3);
+        }
+
+        .show-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .show-pill-text {
+            font-size: 12px;
+            color: var(--tx2);
+            flex: 1;
+        }
+
+        .show-pill.active .show-pill-text {
+            color: var(--g200);
+        }
+
+        .show-pill-count {
+            font-size: 11px;
+            color: var(--tx3);
+        }
+
+        /* ── Main area ── */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: var(--bg2);
+        }
+
+        /* ── Topbar ── */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 22px;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--bdr);
+            flex-shrink: 0;
+        }
+
+        .topbar-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--tx1);
+        }
+
+        .topbar-sub {
+            font-size: 12px;
+            color: var(--tx2);
+            margin-top: 2px;
+        }
+
+        .view-tabs {
+            display: flex;
+            gap: 2px;
+        }
+
+        .vtab {
+            padding: 6px 14px;
+            font-size: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--tx2);
+            border: 1px solid transparent;
+        }
+
+        .vtab:hover {
+            color: var(--tx1);
+            background: var(--bg3);
+        }
+
+        .vtab.active {
+            background: var(--p50);
+            color: var(--p200);
+            border-color: rgba(127, 119, 221, 0.3);
+            font-weight: 600;
+        }
+
+        .add-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 6px;
+            background: var(--g400);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .add-btn:hover {
+            background: var(--g300);
+        }
+
+        .show-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--g50);
+            border: 1px solid rgba(99, 153, 34, 0.25);
+        }
+
+        .show-badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--g400);
+        }
+
+        .show-badge-text {
+            font-size: 12px;
+            color: var(--g200);
+            font-weight: 600;
+        }
+
+        /* ── Content area ── */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 18px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* ── Stat cards ── */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .stat-card {
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            border: 1px solid var(--bdr);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .stat-badge {
+            display: inline-block;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* ── Generic card ── */
+        .card {
+            background: var(--bg3);
+            border: 1px solid var(--bdr);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--tx1);
+        }
+
+        .card-action {
+            font-size: 11px;
+            color: var(--p300);
+            cursor: pointer;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 14px;
+        }
+
+        /* ── Deadline items ── */
+        .deadline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .deadline-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: var(--bg4);
+        }
+
+        .deadline-stripe {
+            width: 3px;
+            min-height: 30px;
+            border-radius: 2px;
+            align-self: stretch;
+            flex-shrink: 0;
+        }
+
+        .deadline-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--tx1);
+        }
+
+        .deadline-show {
+            font-size: 11px;
+            color: var(--tx2);
+        }
+
+        .deadline-date {
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ── Show progress cards ── */
+        .show-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .show-card {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--bdr);
+        }
+
+        .show-card-header {
+            padding: 10px 12px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .show-card-name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .show-card-date {
+            font-size: 11px;
+        }
+
+        .progress-row {
+            padding: 4px 12px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background: var(--bg3);
+        }
+
+        .prog-bg {
+            height: 5px;
+            border-radius: 3px;
+            background: var(--bg5);
+            overflow: hidden;
+        }
+
+        .prog-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        .prog-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+        }
+
+        /* ── Kanban ── */
+        .proj-tabs {
+            display: flex;
+            padding: 0 22px;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--bdr);
+            flex-shrink: 0;
+            overflow-x: auto;
+        }
+
+        .ptab {
+            padding: 10px 16px;
+            font-size: 12px;
+            color: var(--tx2);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        .ptab:hover {
+            color: var(--tx1);
+        }
+
+        .ptab.active {
+            color: var(--g200);
+            border-bottom-color: var(--g400);
+            font-weight: 700;
+        }
+
+        .board {
+            flex: 1;
+            display: flex;
+            gap: 14px;
+            padding: 16px 22px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            align-items: flex-start;
+            background: var(--bg0);
+        }
+
+        .col {
+            width: 220px;
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .col-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2px 6px;
+        }
+
+        .col-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--tx1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .col-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .col-count {
+            font-size: 11px;
+            color: var(--tx3);
+            background: var(--bg3);
+            padding: 1px 7px;
+            border-radius: 10px;
+            border: 1px solid var(--bdr);
+        }
+
+        .task-card {
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: var(--radius);
+            padding: 11px 13px;
+            cursor: pointer;
+        }
+
+        .task-card:hover {
+            border-color: var(--bdr2);
+            background: var(--bg3);
+        }
+
+        .task-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .task-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--tx1);
+            line-height: 1.4;
+        }
+
+        .pri-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .task-proj {
+            font-size: 11px;
+            color: var(--tx2);
+            margin-bottom: 7px;
+        }
+
+        .task-meta {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .task-mats {
+            font-size: 10px;
+            color: var(--tx3);
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px solid var(--bdr);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ── List view ── */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--bdr);
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+
+        .fchip {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            border: 1px solid var(--bdr);
+            color: var(--tx2);
+            cursor: pointer;
+            background: var(--bg3);
+        }
+
+        .fchip:hover {
+            border-color: var(--bdr2);
+            color: var(--tx1);
+        }
+
+        .fchip.on {
+            background: var(--p50);
+            color: var(--p200);
+            border-color: rgba(127, 119, 221, 0.3);
+        }
+
+        .fsep {
+            width: 1px;
+            height: 18px;
+            background: var(--bdr);
+        }
+
+        .table-wrap {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: auto;
+            background: var(--bg2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        thead tr {
+            background: var(--bg1);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        th {
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--tx3);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            border-bottom: 1px solid var(--bdr);
+            white-space: nowrap;
+        }
+
+        th:first-child {
+            padding-left: 22px;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--bdr);
+            cursor: pointer;
+        }
+
+        tbody tr:hover {
+            background: var(--bg3);
+        }
+
+        td {
+            padding: 10px 12px;
+            vertical-align: middle;
+            color: var(--tx1);
+        }
+
+        td:first-child {
+            padding-left: 22px;
+        }
+
+        .group-row td {
+            background: var(--bg1);
+            padding: 6px 12px 6px 22px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--tx3);
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        .group-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .group-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .group-count {
+            background: var(--bg3);
+            border: 1px solid var(--bdr);
+            border-radius: 10px;
+            padding: 1px 7px;
+            font-size: 10px;
+            color: var(--tx3);
+        }
+
+        .tname-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .expand-btn {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            border: 1px solid var(--bdr2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--tx3);
+            font-size: 9px;
+            cursor: pointer;
+        }
+
+        .subtask-indent {
+            padding-left: 34px;
+        }
+
+        .subtask-text {
+            font-size: 11px;
+            color: var(--tx2);
+        }
+
+        .pbadge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .due-overdue {
+            color: var(--pk300);
+            font-weight: 700;
+            font-size: 11px;
+        }
+
+        .due-today {
+            color: var(--a300);
+            font-weight: 700;
+            font-size: 11px;
+        }
+
+        .due-ok {
+            color: var(--tx3);
+            font-size: 11px;
+        }
+
+        .mat-cell {
+            font-size: 11px;
+            color: var(--tx2);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .notes-cell {
+            font-size: 11px;
+            color: var(--tx3);
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ── Task detail ── */
+        .list-pane {
+            width: 260px;
+            min-width: 260px;
+            border-right: 1px solid var(--bdr);
+            display: flex;
+            flex-direction: column;
+            background: var(--bg1);
+        }
+
+        .lp-header {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        .lp-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--tx1);
+        }
+
+        .lp-sub {
+            font-size: 11px;
+            color: var(--tx2);
+            margin-top: 2px;
+        }
+
+        .task-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .task-row {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--bdr);
+            cursor: pointer;
+        }
+
+        .task-row.selected {
+            background: var(--p50);
+            border-right: 2px solid var(--p400);
+        }
+
+        .task-row:hover:not(.selected) {
+            background: var(--bg2);
+        }
+
+        .tr-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--tx1);
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .tr-meta {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .tr-date {
+            font-size: 10px;
+            color: var(--tx3);
+            margin-left: auto;
+        }
+
+        .detail-pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: var(--bg2);
+        }
+
+        .dp-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--bdr);
+            flex-shrink: 0;
+        }
+
+        .breadcrumb {
+            font-size: 11px;
+            color: var(--tx3);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dp-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .abtn {
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            border: 1px solid var(--bdr2);
+            color: var(--tx2);
+            background: var(--bg3);
+            font-family: inherit;
+        }
+
+        .abtn:hover {
+            color: var(--tx1);
+        }
+
+        .abtn.primary {
+            background: var(--g400);
+            color: #fff;
+            border-color: var(--g400);
+            font-weight: 700;
+        }
+
+        .abtn.primary:hover {
+            background: var(--g300);
+        }
+
+        .detail-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .detail-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--tx1);
+            line-height: 1.35;
+            flex: 1;
+        }
+
+        .detail-title-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .meta-field {
+            background: var(--bg3);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            border: 1px solid var(--bdr);
+        }
+
+        .mf-label {
+            font-size: 10px;
+            color: var(--tx3);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .mf-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--tx1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .sec-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--tx3);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        .mat-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .mat-table th {
+            text-align: left;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--tx3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0 10px 6px 0;
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        .mat-table td {
+            padding: 8px 10px 8px 0;
+            border-bottom: 1px solid var(--bdr);
+            color: var(--tx1);
+            vertical-align: middle;
+        }
+
+        .mat-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .mat-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .mat-spec {
+            font-size: 11px;
+            color: var(--tx2);
+            margin-top: 2px;
+        }
+
+        .mat-qty {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--p300);
+        }
+
+        .add-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            font-size: 11px;
+            color: var(--p300);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .subtasks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .stask {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: var(--bg3);
+            border: 1px solid var(--bdr);
+        }
+
+        .stask-check {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            border: 1px solid var(--bdr2);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stask-check.done {
+            background: var(--g400);
+            border-color: var(--g400);
+        }
+
+        .stask-text {
+            font-size: 12px;
+            color: var(--tx1);
+            flex: 1;
+        }
+
+        .stask-text.done {
+            text-decoration: line-through;
+            color: var(--tx3);
+        }
+
+        .stask-due {
+            font-size: 10px;
+            color: var(--tx3);
+        }
+
+        .notes-area {
+            background: var(--bg3);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            font-size: 12px;
+            color: var(--tx2);
+            line-height: 1.6;
+            min-height: 56px;
+            border: 1px solid var(--bdr);
+        }
+
+        /* ── Show detail hero ── */
+        .show-hero {
+            background: var(--g700);
+            padding: 18px 24px 0;
+            flex-shrink: 0;
+            border-bottom: 1px solid rgba(99, 153, 34, 0.2);
+        }
+
+        .hero-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .hero-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+            flex-wrap: wrap;
+        }
+
+        .hero-chip {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: var(--g100);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .hero-btn {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            font-family: inherit;
+        }
+
+        .hero-btn.primary {
+            background: var(--g400);
+            border-color: var(--g400);
+            font-weight: 700;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 4px;
+        }
+
+        .hero-stat {
+            padding: 12px 16px;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-stat:first-child {
+            border-left: none;
+        }
+
+        .hs-label {
+            font-size: 10px;
+            color: var(--g100);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .hs-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .hs-sub {
+            font-size: 10px;
+            color: var(--g200);
+            margin-top: 2px;
+        }
+
+        /* ── Show detail project cards ── */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .proj-card {
+            background: var(--bg3);
+            border: 1px solid var(--bdr);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .proj-card:hover {
+            border-color: var(--bdr2);
+            background: var(--bg4);
+        }
+
+        .pc-header {
+            padding: 12px 14px 10px;
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        .pc-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--tx1);
+            margin-bottom: 3px;
+        }
+
+        .pc-count {
+            font-size: 11px;
+            color: var(--tx2);
+        }
+
+        .pc-body {
+            padding: 10px 14px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .pp-bg {
+            height: 4px;
+            border-radius: 2px;
+            background: var(--bg5);
+            overflow: hidden;
+        }
+
+        .pp-fill {
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        .pp-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+        }
+
+        .pp-pills {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .pp-pill {
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .add-proj-card {
+            background: var(--bg1);
+            border: 2px dashed var(--bdr2);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            min-height: 120px;
+        }
+
+        .add-proj-card:hover {
+            border-color: var(--p400);
+        }
+
+        .add-proj-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--bg3);
+            border: 1px solid var(--bdr2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--tx3);
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .add-proj-label {
+            font-size: 12px;
+            color: var(--tx3);
+        }
+
+        .deadline-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+            gap: 12px;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .act-item {
+            display: flex;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        .act-item:last-child {
+            border-bottom: none;
+        }
+
+        .act-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .act-text {
+            font-size: 11px;
+            color: var(--tx2);
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .act-text strong {
+            font-weight: 700;
+            color: var(--tx1);
+        }
+
+        .act-time {
+            font-size: 10px;
+            color: var(--tx3);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ── Modals ── */
+        .modal-tabs {
+            display: flex;
+            gap: 4px;
+            padding: 14px 24px 0;
+            border-bottom: 1px solid var(--bdr);
+            background: var(--bg1);
+        }
+
+        .mtab {
+            padding: 7px 16px;
+            font-size: 12px;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            color: var(--tx2);
+            border: 1px solid transparent;
+            border-bottom: none;
+            background: transparent;
+            user-select: none;
+        }
+
+        .mtab:hover {
+            color: var(--tx1);
+            background: var(--bg2);
+        }
+
+        .mtab.active {
+            background: var(--bg2);
+            color: var(--p200);
+            border-color: var(--bdr);
+            font-weight: 700;
+            margin-bottom: -1px;
+        }
+
+        .modal-stage {
+            min-height: 520px;
+            background: var(--bg0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fake-bg {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255, 255, 255, 0.02) 39px, rgba(255, 255, 255, 0.02) 40px), repeating-linear-gradient(180deg, transparent, transparent 39px, rgba(255, 255, 255, 0.02) 39px, rgba(255, 255, 255, 0.02) 40px);
+        }
+
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+        }
+
+        .modal {
+            background: var(--bg2);
+            border-radius: var(--radius);
+            border: 1px solid var(--bdr2);
+            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.7);
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-header {
+            padding: 16px 20px 14px;
+            border-bottom: 1px solid var(--bdr);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg3);
+        }
+
+        .modal-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--tx1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .micon {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mclose {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid var(--bdr2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--tx3);
+            font-size: 13px;
+        }
+
+        .mclose:hover {
+            color: var(--tx1);
+            background: var(--bg4);
+        }
+
+        .modal-body {
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .modal-footer {
+            padding: 12px 20px;
+            border-top: 1px solid var(--bdr);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            background: var(--bg3);
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .flabel {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--tx2);
+        }
+
+        .freq {
+            color: var(--pk300);
+        }
+
+        .finput {
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--bdr2);
+            font-size: 13px;
+            color: var(--tx1);
+            background: var(--bg3);
+            font-family: inherit;
+            outline: none;
+        }
+
+        .finput:focus, .finput.focused {
+            border-color: var(--p400);
+            box-shadow: 0 0 0 3px rgba(127, 119, 221, 0.15);
+        }
+
+        .finput::placeholder {
+            color: var(--tx3);
+        }
+
+        textarea.finput {
+            resize: vertical;
+        }
+
+        select.finput option {
+            background: var(--bg3);
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .fhint {
+            font-size: 10px;
+            color: var(--tx3);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .cswatch {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .cswatch.selected {
+            border-color: var(--tx1);
+        }
+
+        .ctx-banner {
+            background: rgba(99, 153, 34, 0.1);
+            border: 1px solid rgba(99, 153, 34, 0.2);
+            border-radius: 6px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .ctx-label {
+            font-size: 10px;
+            color: var(--g200);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-weight: 700;
+        }
+
+        .ctx-value {
+            font-size: 12px;
+            color: var(--g100);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+
+        .priority-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .popt {
+            flex: 1;
+            padding: 7px 6px;
+            border-radius: 6px;
+            font-size: 11px;
+            text-align: center;
+            border: 1px solid var(--bdr2);
+            cursor: pointer;
+            color: var(--tx2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-weight: 600;
+            user-select: none;
+            background: var(--bg3);
+        }
+
+        .popt:hover {
+            border-color: var(--bdr2);
+            color: var(--tx1);
+        }
+
+        .popt.selected {
+            border-width: 2px;
+            font-weight: 700;
+        }
+
+        .pdot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .mat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 60px 24px;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .mat-remove {
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            border: 1px solid var(--bdr);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--tx3);
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .mat-remove:hover {
+            background: var(--pk50);
+            color: var(--pk300);
+            border-color: rgba(212, 83, 126, 0.3);
+        }
+
+        .mbtn {
+            padding: 7px 18px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 700;
+        }
+
+        .mbtn-ghost {
+            background: transparent;
+            border: 1px solid var(--bdr2);
+            color: var(--tx2);
+        }
+
+        .mbtn-ghost:hover {
+            background: var(--bg3);
+            color: var(--tx1);
+        }
+
+        .mbtn-green {
+            background: var(--g400);
+            border: none;
+            color: #fff;
+        }
+
+        .mbtn-green:hover {
+            background: var(--g300);
+        }
+
+        .mbtn-purple {
+            background: var(--p600);
+            border: none;
+            color: #fff;
+        }
+
+        .mbtn-purple:hover {
+            background: var(--p400);
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav" id="main-nav">
+    <div class="nav-tab active" onclick="showScreen('dashboard')">Dashboard</div>
+    <div class="nav-tab" onclick="showScreen('kanban')">Kanban board</div>
+    <div class="nav-tab" onclick="showScreen('list')">List view</div>
+    <div class="nav-tab" onclick="showScreen('task')">Task detail</div>
+    <div class="nav-tab" onclick="showScreen('show')">Show detail</div>
+    <div class="nav-tab" onclick="showScreen('modals')">Creation flows</div>
+</div>
+
+<!-- ═══ DASHBOARD ═══ -->
+<div class="screen active" id="screen-dashboard">
+    <div class="app-shell">
+        <div class="sidebar">
+            <div class="sb-header">
+                <div class="sb-appname">Stagecraft</div>
+                <div class="sb-appsub">Set Construction Manager</div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Navigation</div>
+                <div class="sb-item active">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <rect height="7" rx="1" width="7" x="3" y="3"/>
+                        <rect height="7" rx="1" width="7" x="14" y="3"/>
+                        <rect height="7" rx="1" width="7" x="3" y="14"/>
+                        <rect height="7" rx="1" width="7" x="14" y="14"/>
+                    </svg>
+                    Dashboard
+                </div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                        <rect height="4" rx="1" width="6" x="9" y="3"/>
+                    </svg>
+                    All tasks
+                </div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 3"/>
+                    </svg>
+                    Deadlines
+                </div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Shows</div>
+                <div class="show-pill active">
+                    <div class="show-dot" style="background:#639922"></div>
+                    <div class="show-pill-text">Midsummer Night</div>
+                    <div class="show-pill-count">12</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#D4537E"></div>
+                    <div class="show-pill-text">Hamlet Revival</div>
+                    <div class="show-pill-count">8</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#7F77DD"></div>
+                    <div class="show-pill-text">West Side Story</div>
+                    <div class="show-pill-count">5</div>
+                </div>
+                <div class="show-pill" style="opacity:0.5">
+                    <div class="show-dot" style="background:#38354f"></div>
+                    <div class="show-pill-text" style="color:#5f5d78">+ New show</div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="topbar">
+                <div>
+                    <div class="topbar-title">Dashboard</div>
+                    <div class="topbar-sub">All active shows · Spring 2026</div>
+                </div>
+                <div class="view-tabs">
+                    <div class="vtab active">Overview</div>
+                    <div class="vtab">Kanban</div>
+                    <div class="vtab">List</div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="stat-row">
+                    <div class="stat-card" style="background:#1e1c35;border-color:rgba(127,119,221,0.2)">
+                        <div class="stat-label" style="color:#9E97E6">Active shows</div>
+                        <div class="stat-value" style="color:#CECBF6">3</div>
+                        <div class="stat-badge" style="background:rgba(127,119,221,0.15);color:#AFA9EC">In progress
+                        </div>
+                    </div>
+                    <div class="stat-card" style="background:#141f09;border-color:rgba(99,153,34,0.2)">
+                        <div class="stat-label" style="color:#7cb82a">Open tasks</div>
+                        <div class="stat-value" style="color:#C0DD97">47</div>
+                        <div class="stat-badge" style="background:rgba(99,153,34,0.15);color:#97C459">Across all shows
+                        </div>
+                    </div>
+                    <div class="stat-card" style="background:#1e1505;border-color:rgba(186,117,23,0.2)">
+                        <div class="stat-label" style="color:#d08a25">Due this week</div>
+                        <div class="stat-value" style="color:#FAC775">9</div>
+                        <div class="stat-badge" style="background:rgba(186,117,23,0.15);color:#FAC775">Needs attention
+                        </div>
+                    </div>
+                    <div class="stat-card" style="background:#1e0d15;border-color:rgba(212,83,126,0.2)">
+                        <div class="stat-label" style="color:#dc6e91">Overdue</div>
+                        <div class="stat-value" style="color:#F4C0D1">2</div>
+                        <div class="stat-badge" style="background:rgba(212,83,126,0.15);color:#ED93B1">Urgent</div>
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Upcoming deadlines</div>
+                            <div class="card-action">View all →</div>
+                        </div>
+                        <div class="deadline-list">
+                            <div class="deadline-item">
+                                <div class="deadline-stripe" style="background:#D4537E"></div>
+                                <div style="flex:1">
+                                    <div class="deadline-title">Order lumber — main platform</div>
+                                    <div class="deadline-show">Midsummer Night · Structural build</div>
+                                </div>
+                                <div class="deadline-date" style="color:#dc6e91">Yesterday</div>
+                            </div>
+                            <div class="deadline-item">
+                                <div class="deadline-stripe" style="background:#BA7517"></div>
+                                <div style="flex:1">
+                                    <div class="deadline-title">Paint drop: forest backdrop</div>
+                                    <div class="deadline-show">Midsummer Night · Scenic paint</div>
+                                </div>
+                                <div class="deadline-date" style="color:#d08a25">Today</div>
+                            </div>
+                            <div class="deadline-item">
+                                <div class="deadline-stripe" style="background:#D4537E"></div>
+                                <div style="flex:1">
+                                    <div class="deadline-title">Fabricate castle battlements</div>
+                                    <div class="deadline-show">Hamlet Revival · Build</div>
+                                </div>
+                                <div class="deadline-date" style="color:#5f5d78">Apr 1</div>
+                            </div>
+                            <div class="deadline-item">
+                                <div class="deadline-stripe" style="background:#7F77DD"></div>
+                                <div style="flex:1">
+                                    <div class="deadline-title">Steel order — fire escape unit</div>
+                                    <div class="deadline-show">West Side Story · Structural</div>
+                                </div>
+                                <div class="deadline-date" style="color:#5f5d78">Apr 3</div>
+                            </div>
+                            <div class="deadline-item">
+                                <div class="deadline-stripe" style="background:#639922"></div>
+                                <div style="flex:1">
+                                    <div class="deadline-title">Rigging inspection sign-off</div>
+                                    <div class="deadline-show">Midsummer Night · Safety</div>
+                                </div>
+                                <div class="deadline-date" style="color:#5f5d78">Apr 5</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Show progress</div>
+                        </div>
+                        <div class="show-cards">
+                            <div class="show-card">
+                                <div class="show-card-header" style="background:#141f09">
+                                    <div class="show-card-name" style="color:#97C459">Midsummer Night</div>
+                                    <div class="show-card-date" style="color:#639922">Opens May 10</div>
+                                </div>
+                                <div class="progress-row">
+                                    <div class="prog-bg">
+                                        <div class="prog-fill" style="width:62%;background:#639922"></div>
+                                    </div>
+                                    <div class="prog-meta"><span style="color:#5f5d78">7 of 12 done</span><span
+                                            style="color:#7cb82a;font-weight:700">62%</span></div>
+                                </div>
+                            </div>
+                            <div class="show-card">
+                                <div class="show-card-header" style="background:#1e0d15">
+                                    <div class="show-card-name" style="color:#ED93B1">Hamlet Revival</div>
+                                    <div class="show-card-date" style="color:#D4537E">Opens Jun 3</div>
+                                </div>
+                                <div class="progress-row">
+                                    <div class="prog-bg">
+                                        <div class="prog-fill" style="width:38%;background:#D4537E"></div>
+                                    </div>
+                                    <div class="prog-meta"><span style="color:#5f5d78">3 of 8 done</span><span
+                                            style="color:#dc6e91;font-weight:700">38%</span></div>
+                                </div>
+                            </div>
+                            <div class="show-card">
+                                <div class="show-card-header" style="background:#1e1c35">
+                                    <div class="show-card-name" style="color:#CECBF6">West Side Story</div>
+                                    <div class="show-card-date" style="color:#7F77DD">Opens Jul 18</div>
+                                </div>
+                                <div class="progress-row">
+                                    <div class="prog-bg">
+                                        <div class="prog-fill" style="width:20%;background:#7F77DD"></div>
+                                    </div>
+                                    <div class="prog-meta"><span style="color:#5f5d78">1 of 5 done</span><span
+                                            style="color:#9E97E6;font-weight:700">20%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ KANBAN ═══ -->
+<div class="screen" id="screen-kanban">
+    <div class="app-shell">
+        <div class="sidebar">
+            <div class="sb-header">
+                <div class="sb-appname">Stagecraft</div>
+                <div class="sb-appsub">Set Construction Manager</div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Navigation</div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <rect height="7" rx="1" width="7" x="3" y="3"/>
+                        <rect height="7" rx="1" width="7" x="14" y="3"/>
+                        <rect height="7" rx="1" width="7" x="3" y="14"/>
+                        <rect height="7" rx="1" width="7" x="14" y="14"/>
+                    </svg>
+                    Dashboard
+                </div>
+                <div class="sb-item active">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                        <rect height="4" rx="1" width="6" x="9" y="3"/>
+                    </svg>
+                    All tasks
+                </div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 3"/>
+                    </svg>
+                    Deadlines
+                </div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Shows</div>
+                <div class="show-pill active">
+                    <div class="show-dot" style="background:#639922"></div>
+                    <div class="show-pill-text">Midsummer Night</div>
+                    <div class="show-pill-count">12</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#D4537E"></div>
+                    <div class="show-pill-text">Hamlet Revival</div>
+                    <div class="show-pill-count">8</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#7F77DD"></div>
+                    <div class="show-pill-text">West Side Story</div>
+                    <div class="show-pill-count">5</div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="topbar">
+                <div style="display:flex;align-items:center;gap:10px">
+                    <div class="topbar-title">Midsummer Night</div>
+                    <div class="show-badge">
+                        <div class="show-badge-dot"></div>
+                        <div class="show-badge-text">Active · Opens May 10</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                    <div class="view-tabs">
+                        <div class="vtab">Overview</div>
+                        <div class="vtab active">Kanban</div>
+                        <div class="vtab">List</div>
+                    </div>
+                    <button class="add-btn">+ Add task</button>
+                </div>
+            </div>
+            <div class="proj-tabs">
+                <div class="ptab active">Structural build</div>
+                <div class="ptab">Scenic paint</div>
+                <div class="ptab">Props &amp; dressing</div>
+                <div class="ptab">Safety &amp; rigging</div>
+                <div class="ptab">+ New project</div>
+            </div>
+            <div class="board">
+                <div class="col">
+                    <div class="col-header">
+                        <div class="col-title">
+                            <div class="col-dot" style="background:#38354f"></div>
+                            Not started
+                        </div>
+                        <div class="col-count">2</div>
+                    </div>
+                    <div class="task-card">
+                        <div class="task-top">
+                            <div class="task-name">Weld cross-bracing on upstage platform</div>
+                            <div class="pri-dot" style="background:#D85A30"></div>
+                        </div>
+                        <div class="task-proj">Structural build</div>
+                        <div class="task-meta">
+                            <div class="chip" style="background:#1e0e07;color:#F5C4B3">Apr 8</div>
+                            <div class="chip" style="background:#1e0e07;color:#F5C4B3">High</div>
+                        </div>
+                        <div class="task-mats">
+                            <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                                 width="10">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                            </svg>
+                            3 materials
+                        </div>
+                    </div>
+                    <div class="task-card">
+                        <div class="task-top">
+                            <div class="task-name">Install treads on stair unit C</div>
+                            <div class="pri-dot" style="background:#BA7517"></div>
+                        </div>
+                        <div class="task-proj">Structural build</div>
+                        <div class="task-meta">
+                            <div class="chip" style="background:#1e1505;color:#FAC775">Apr 12</div>
+                            <div class="chip" style="background:#1e1505;color:#FAC775">Medium</div>
+                        </div>
+                        <div class="task-mats">
+                            <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                                 width="10">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                            </svg>
+                            2 materials
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-header">
+                        <div class="col-title">
+                            <div class="col-dot" style="background:#7F77DD"></div>
+                            In progress
+                        </div>
+                        <div class="col-count">3</div>
+                    </div>
+                    <div class="task-card" style="border-left:3px solid #D85A30;border-radius:0 10px 10px 0">
+                        <div class="task-top">
+                            <div class="task-name">Order lumber — main platform decking</div>
+                            <div class="pri-dot" style="background:#D85A30"></div>
+                        </div>
+                        <div class="task-proj">Structural build</div>
+                        <div class="task-meta">
+                            <div class="chip" style="background:#1e0d15;color:#F4C0D1">Overdue</div>
+                            <div class="chip" style="background:#1e0e07;color:#F5C4B3">High</div>
+                        </div>
+                        <div class="task-mats">
+                            <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                                 width="10">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                            </svg>
+                            5 materials
+                        </div>
+                    </div>
+                    <div class="task-card">
+                        <div class="task-top">
+                            <div class="task-name">Build platform frame — downstage left</div>
+                            <div class="pri-dot" style="background:#BA7517"></div>
+                        </div>
+                        <div class="task-proj">Structural build</div>
+                        <div class="task-meta">
+                            <div class="chip" style="background:#1e1505;color:#FAC775">Apr 5</div>
+                            <div class="chip" style="background:#1e1505;color:#FAC775">Medium</div>
+                        </div>
+                        <div class="task-mats">
+                            <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                                 width="10">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                            </svg>
+                            4 materials
+                        </div>
+                    </div>
+                    <div class="task-card">
+                        <div class="task-top">
+                            <div class="task-name">Cut and fit fascia boards</div>
+                            <div class="pri-dot" style="background:#639922"></div>
+                        </div>
+                        <div class="task-proj">Structural build</div>
+                        <div class="task-meta">
+                            <div class="chip" style="background:#141f09;color:#C0DD97">Apr 14</div>
+                            <div class="chip" style="background:#141f09;color:#C0DD97">Low</div>
+                        </div>
+                        <div class="task-mats">
+                            <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                                 width="10">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                            </svg>
+                            2 materials
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-header">
+                        <div class="col-title">
+                            <div class="col-dot" style="background:#BA7517"></div>
+                            Needs review
+                        </div>
+                        <div class="col-count">1</div>
+                    </div>
+                    <div class="task-card">
+                        <div class="task-top">
+                            <div class="task-name">Structural load calc — upstage deck</div>
+                            <div class="pri-dot" style="background:#D85A30"></div>
+                        </div>
+                        <div class="task-proj">Structural build</div>
+                        <div class="task-meta">
+                            <div class="chip" style="background:#1e1c35;color:#CECBF6">Awaiting sign-off</div>
+                        </div>
+                        <div class="task-meta" style="margin-top:4px">
+                            <div class="chip" style="background:#1e0e07;color:#F5C4B3">High</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-header">
+                        <div class="col-title">
+                            <div class="col-dot" style="background:#639922"></div>
+                            Done
+                        </div>
+                        <div class="col-count">2</div>
+                    </div>
+                    <div class="task-card" style="opacity:0.5">
+                        <div class="task-top">
+                            <div class="task-name" style="text-decoration:line-through;color:#5f5d78">Draw construction
+                                drawings
+                            </div>
+                            <div class="pri-dot" style="background:#639922"></div>
+                        </div>
+                        <div class="task-proj">Structural build</div>
+                        <div class="task-meta">
+                            <div class="chip" style="background:#141f09;color:#97C459">Completed Mar 20</div>
+                        </div>
+                    </div>
+                    <div class="task-card" style="opacity:0.5">
+                        <div class="task-top">
+                            <div class="task-name" style="text-decoration:line-through;color:#5f5d78">Confirm stage
+                                dimensions with TD
+                            </div>
+                            <div class="pri-dot" style="background:#639922"></div>
+                        </div>
+                        <div class="task-proj">Structural build</div>
+                        <div class="task-meta">
+                            <div class="chip" style="background:#141f09;color:#97C459">Completed Mar 18</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ LIST VIEW ═══ -->
+<div class="screen" id="screen-list">
+    <div class="app-shell">
+        <div class="sidebar">
+            <div class="sb-header">
+                <div class="sb-appname">Stagecraft</div>
+                <div class="sb-appsub">Set Construction Manager</div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Navigation</div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <rect height="7" rx="1" width="7" x="3" y="3"/>
+                        <rect height="7" rx="1" width="7" x="14" y="3"/>
+                        <rect height="7" rx="1" width="7" x="3" y="14"/>
+                        <rect height="7" rx="1" width="7" x="14" y="14"/>
+                    </svg>
+                    Dashboard
+                </div>
+                <div class="sb-item active">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                        <rect height="4" rx="1" width="6" x="9" y="3"/>
+                    </svg>
+                    All tasks
+                </div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 3"/>
+                    </svg>
+                    Deadlines
+                </div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Shows</div>
+                <div class="show-pill active">
+                    <div class="show-dot" style="background:#639922"></div>
+                    <div class="show-pill-text">Midsummer Night</div>
+                    <div class="show-pill-count">12</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#D4537E"></div>
+                    <div class="show-pill-text">Hamlet Revival</div>
+                    <div class="show-pill-count">8</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#7F77DD"></div>
+                    <div class="show-pill-text">West Side Story</div>
+                    <div class="show-pill-count">5</div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="topbar">
+                <div style="display:flex;align-items:center;gap:10px">
+                    <div class="topbar-title">Midsummer Night</div>
+                    <div class="show-badge">
+                        <div class="show-badge-dot"></div>
+                        <div class="show-badge-text">Active · Opens May 10</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                    <div class="view-tabs">
+                        <div class="vtab">Overview</div>
+                        <div class="vtab">Kanban</div>
+                        <div class="vtab active">List</div>
+                    </div>
+                    <button class="add-btn">+ Add task</button>
+                </div>
+            </div>
+            <div class="toolbar">
+                <div class="fchip on">All projects</div>
+                <div class="fsep"></div>
+                <div class="fchip">Due date</div>
+                <div class="fchip">Priority</div>
+                <div class="fchip">Status</div>
+                <div class="fsep"></div>
+                <div class="fchip">Group by: Project ▾</div>
+                <div style="margin-left:auto">
+                    <div class="fchip">🔍 Search...</div>
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th style="width:36%">Task</th>
+                        <th style="width:11%">Status</th>
+                        <th style="width:10%">Priority</th>
+                        <th style="width:10%">Due date</th>
+                        <th style="width:13%">Materials</th>
+                        <th>Notes</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="group-row">
+                        <td colspan="6">
+                            <div class="group-label">
+                                <div class="group-dot" style="background:#639922"></div>
+                                Structural build
+                                <div class="group-count">5 tasks</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="tname-cell">
+                                <div class="expand-btn">▾</div>
+                                Order lumber — main platform decking
+                            </div>
+                        </td>
+                        <td><span class="pbadge" style="background:#1e0d15;color:#ED93B1">In progress</span></td>
+                        <td><span class="pbadge" style="background:#1e0e07;color:#F5C4B3">High</span></td>
+                        <td>
+                            <div class="due-overdue">Overdue</div>
+                        </td>
+                        <td>
+                            <div class="mat-cell">
+                                <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8"
+                                     viewBox="0 0 24 24"
+                                     width="10">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                                </svg>
+                                5 items
+                            </div>
+                        </td>
+                        <td>
+                            <div class="notes-cell">3/4" plywood, 2x8 joists, bolts</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subtask-indent">
+                            <div class="subtask-text">↳ Confirm quantities with TD</div>
+                        </td>
+                        <td><span class="pbadge" style="background:#141f09;color:#C0DD97">Done</span></td>
+                        <td><span class="pbadge" style="background:#1e0e07;color:#F5C4B3">High</span></td>
+                        <td>
+                            <div class="due-ok">Mar 28</div>
+                        </td>
+                        <td>
+                            <div class="mat-cell">—</div>
+                        </td>
+                        <td>
+                            <div class="notes-cell">Confirmed 4×8 sheets × 24</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subtask-indent">
+                            <div class="subtask-text">↳ Place order with supplier</div>
+                        </td>
+                        <td><span class="pbadge" style="background:#1e0d15;color:#ED93B1">In progress</span></td>
+                        <td><span class="pbadge" style="background:#1e0e07;color:#F5C4B3">High</span></td>
+                        <td>
+                            <div class="due-overdue">Overdue</div>
+                        </td>
+                        <td>
+                            <div class="mat-cell">—</div>
+                        </td>
+                        <td>
+                            <div class="notes-cell">Waiting on quote from Rona</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="tname-cell">
+                                <div class="expand-btn">▸</div>
+                                Build platform frame — downstage left
+                            </div>
+                        </td>
+                        <td><span class="pbadge" style="background:#1e0d15;color:#ED93B1">In progress</span></td>
+                        <td><span class="pbadge" style="background:#1e1505;color:#FAC775">Medium</span></td>
+                        <td>
+                            <div class="due-today">Today</div>
+                        </td>
+                        <td>
+                            <div class="mat-cell">
+                                <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8"
+                                     viewBox="0 0 24 24"
+                                     width="10">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                                </svg>
+                                4 items
+                            </div>
+                        </td>
+                        <td>
+                            <div class="notes-cell">Check angle iron stock first</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="tname-cell">
+                                <div class="expand-btn">▸</div>
+                                Weld cross-bracing on upstage platform
+                            </div>
+                        </td>
+                        <td><span class="pbadge" style="background:#252336;color:#5f5d78">Not started</span></td>
+                        <td><span class="pbadge" style="background:#1e0e07;color:#F5C4B3">High</span></td>
+                        <td>
+                            <div class="due-ok">Apr 8</div>
+                        </td>
+                        <td>
+                            <div class="mat-cell">
+                                <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8"
+                                     viewBox="0 0 24 24"
+                                     width="10">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                                </svg>
+                                3 items
+                            </div>
+                        </td>
+                        <td>
+                            <div class="notes-cell">—</div>
+                        </td>
+                    </tr>
+                    <tr class="group-row">
+                        <td colspan="6">
+                            <div class="group-label">
+                                <div class="group-dot" style="background:#D4537E"></div>
+                                Scenic paint
+                                <div class="group-count">3 tasks</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="tname-cell">
+                                <div class="expand-btn">▸</div>
+                                Paint drop: forest backdrop
+                            </div>
+                        </td>
+                        <td><span class="pbadge" style="background:#1e0d15;color:#ED93B1">In progress</span></td>
+                        <td><span class="pbadge" style="background:#1e1505;color:#FAC775">Medium</span></td>
+                        <td>
+                            <div class="due-today">Today</div>
+                        </td>
+                        <td>
+                            <div class="mat-cell">
+                                <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8"
+                                     viewBox="0 0 24 24"
+                                     width="10">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                                </svg>
+                                6 items
+                            </div>
+                        </td>
+                        <td>
+                            <div class="notes-cell">Greens, ochres, base coat first</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="tname-cell">
+                                <div class="expand-btn">▸</div>
+                                Prime all flats — Act 2 set
+                            </div>
+                        </td>
+                        <td><span class="pbadge" style="background:#252336;color:#5f5d78">Not started</span></td>
+                        <td><span class="pbadge" style="background:#141f09;color:#C0DD97">Low</span></td>
+                        <td>
+                            <div class="due-ok">Apr 15</div>
+                        </td>
+                        <td>
+                            <div class="mat-cell">
+                                <svg fill="none" height="10" stroke="currentColor" stroke-width="1.8"
+                                     viewBox="0 0 24 24"
+                                     width="10">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                                </svg>
+                                2 items
+                            </div>
+                        </td>
+                        <td>
+                            <div class="notes-cell">—</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="tname-cell">
+                                <div class="expand-btn" style="border-color:transparent"></div>
+                                <span style="text-decoration:line-through;color:#5f5d78">Mix base colours — season palette</span>
+                            </div>
+                        </td>
+                        <td><span class="pbadge" style="background:#141f09;color:#C0DD97">Done</span></td>
+                        <td><span class="pbadge" style="background:#1e1505;color:#FAC775">Medium</span></td>
+                        <td>
+                            <div class="due-ok">Mar 22</div>
+                        </td>
+                        <td>
+                            <div class="mat-cell">—</div>
+                        </td>
+                        <td>
+                            <div class="notes-cell">Matched to designer swatches</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ TASK DETAIL ═══ -->
+<div class="screen" id="screen-task">
+    <div class="app-shell">
+        <div class="sidebar">
+            <div class="sb-header">
+                <div class="sb-appname">Stagecraft</div>
+                <div class="sb-appsub">Set Construction Manager</div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Navigation</div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <rect height="7" rx="1" width="7" x="3" y="3"/>
+                        <rect height="7" rx="1" width="7" x="14" y="3"/>
+                        <rect height="7" rx="1" width="7" x="3" y="14"/>
+                        <rect height="7" rx="1" width="7" x="14" y="14"/>
+                    </svg>
+                    Dashboard
+                </div>
+                <div class="sb-item active">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                        <rect height="4" rx="1" width="6" x="9" y="3"/>
+                    </svg>
+                    All tasks
+                </div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 3"/>
+                    </svg>
+                    Deadlines
+                </div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Shows</div>
+                <div class="show-pill active">
+                    <div class="show-dot" style="background:#639922"></div>
+                    <div class="show-pill-text">Midsummer Night</div>
+                    <div class="show-pill-count">12</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#D4537E"></div>
+                    <div class="show-pill-text">Hamlet Revival</div>
+                    <div class="show-pill-count">8</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#7F77DD"></div>
+                    <div class="show-pill-text">West Side Story</div>
+                    <div class="show-pill-count">5</div>
+                </div>
+            </div>
+        </div>
+        <div class="main" style="flex-direction:row">
+            <div class="list-pane">
+                <div class="lp-header">
+                    <div class="lp-title">Structural build</div>
+                    <div class="lp-sub">Midsummer Night · 5 tasks</div>
+                </div>
+                <div class="task-list">
+                    <div class="task-row selected">
+                        <div class="tr-name">Order lumber — main platform decking</div>
+                        <div class="tr-meta"><span class="pbadge"
+                                                   style="background:#1e0d15;color:#ED93B1;font-size:10px">In progress</span><span
+                                class="pbadge" style="background:#1e0e07;color:#F5C4B3;font-size:10px">High</span><span
+                                class="tr-date" style="color:#dc6e91">Overdue</span></div>
+                    </div>
+                    <div class="task-row">
+                        <div class="tr-name">Build platform frame — DSL</div>
+                        <div class="tr-meta"><span class="pbadge"
+                                                   style="background:#1e0d15;color:#ED93B1;font-size:10px">In progress</span><span
+                                class="pbadge"
+                                style="background:#1e1505;color:#FAC775;font-size:10px">Medium</span><span
+                                class="tr-date" style="color:#d08a25">Today</span></div>
+                    </div>
+                    <div class="task-row">
+                        <div class="tr-name">Weld cross-bracing on upstage platform</div>
+                        <div class="tr-meta"><span class="pbadge"
+                                                   style="background:#252336;color:#5f5d78;font-size:10px">Not started</span><span
+                                class="pbadge" style="background:#1e0e07;color:#F5C4B3;font-size:10px">High</span><span
+                                class="tr-date">Apr 8</span></div>
+                    </div>
+                    <div class="task-row">
+                        <div class="tr-name">Structural load calc — upstage deck</div>
+                        <div class="tr-meta"><span class="pbadge"
+                                                   style="background:#1e1505;color:#FAC775;font-size:10px">Review</span><span
+                                class="pbadge" style="background:#1e0e07;color:#F5C4B3;font-size:10px">High</span><span
+                                class="tr-date">Apr 2</span></div>
+                    </div>
+                    <div class="task-row">
+                        <div class="tr-name" style="text-decoration:line-through;color:#5f5d78">Draw construction
+                            drawings
+                        </div>
+                        <div class="tr-meta"><span class="pbadge"
+                                                   style="background:#141f09;color:#97C459;font-size:10px">Done</span><span
+                                class="tr-date">Mar 20</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-pane">
+                <div class="dp-topbar">
+                    <div class="breadcrumb"><span>Midsummer Night</span><span style="opacity:0.35">›</span><span>Structural build</span><span
+                            style="opacity:0.35">›</span><span style="color:#9E97E6;font-weight:700">Order lumber</span>
+                    </div>
+                    <div class="dp-actions">
+                        <button class="abtn">Delete</button>
+                        <button class="abtn">Duplicate</button>
+                        <button class="abtn primary">Mark done</button>
+                    </div>
+                </div>
+                <div class="detail-body">
+                    <div class="detail-title-row">
+                        <div class="detail-title">Order lumber — main platform decking</div>
+                        <div class="status-pill" style="background:#1e0d15;color:#ED93B1">
+                            <div style="width:7px;height:7px;border-radius:50%;background:#D4537E"></div>
+                            In progress
+                        </div>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-field">
+                            <div class="mf-label">Priority</div>
+                            <div class="mf-value">
+                                <div style="width:8px;height:8px;border-radius:50%;background:#D85A30"></div>
+                                High
+                            </div>
+                        </div>
+                        <div class="meta-field">
+                            <div class="mf-label">Due date</div>
+                            <div class="mf-value" style="color:#dc6e91">
+                                <svg fill="none" height="11" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                                     width="11">
+                                    <rect height="18" rx="2" width="18" x="3" y="4"/>
+                                    <path d="M16 2v4M8 2v4M3 10h18"/>
+                                </svg>
+                                Mar 27 · Overdue
+                            </div>
+                        </div>
+                        <div class="meta-field">
+                            <div class="mf-label">Project</div>
+                            <div class="mf-value">
+                                <div style="width:8px;height:8px;border-radius:50%;background:#639922"></div>
+                                Structural build
+                            </div>
+                        </div>
+                        <div class="meta-field">
+                            <div class="mf-label">Show</div>
+                            <div class="mf-value">
+                                <div style="width:8px;height:8px;border-radius:50%;background:#639922"></div>
+                                Midsummer Night
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-label">Materials</div>
+                        <table class="mat-table">
+                            <thead>
+                            <tr>
+                                <th style="width:36%">Item</th>
+                                <th style="width:30%">Spec</th>
+                                <th style="width:14%">Qty</th>
+                                <th>Unit</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="mat-name">Plywood sheeting</div>
+                                </td>
+                                <td>
+                                    <div class="mat-spec">3/4", 4×8, BCX grade</div>
+                                </td>
+                                <td>
+                                    <div class="mat-qty">24</div>
+                                </td>
+                                <td style="color:#5f5d78;font-size:11px">sheets</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="mat-name">Lumber — 2×8</div>
+                                </td>
+                                <td>
+                                    <div class="mat-spec">10 ft, #2 pine</div>
+                                </td>
+                                <td>
+                                    <div class="mat-qty">32</div>
+                                </td>
+                                <td style="color:#5f5d78;font-size:11px">pcs</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="mat-name">Carriage bolts</div>
+                                </td>
+                                <td>
+                                    <div class="mat-spec">3/8" × 3", nuts &amp; washers</div>
+                                </td>
+                                <td>
+                                    <div class="mat-qty">120</div>
+                                </td>
+                                <td style="color:#5f5d78;font-size:11px">pcs</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="mat-name">Joist hangers</div>
+                                </td>
+                                <td>
+                                    <div class="mat-spec">2×8, galvanised</div>
+                                </td>
+                                <td>
+                                    <div class="mat-qty">48</div>
+                                </td>
+                                <td style="color:#5f5d78;font-size:11px">pcs</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="mat-name">Deck screws</div>
+                                </td>
+                                <td>
+                                    <div class="mat-spec">2.5", coarse thread</div>
+                                </td>
+                                <td>
+                                    <div class="mat-qty">2</div>
+                                </td>
+                                <td style="color:#5f5d78;font-size:11px">lbs</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="add-link">
+                            <svg fill="none" height="11" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                                 width="11">
+                                <path d="M12 5v14M5 12h14"/>
+                            </svg>
+                            Add material
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-label">Subtasks</div>
+                        <div class="subtasks-list">
+                            <div class="stask">
+                                <div class="stask-check done">
+                                    <svg fill="none" height="8" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"
+                                         width="8">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                </div>
+                                <div class="stask-text done">Confirm quantities with TD</div>
+                                <div class="stask-due">Mar 28</div>
+                            </div>
+                            <div class="stask">
+                                <div class="stask-check"></div>
+                                <div class="stask-text">Place order with supplier</div>
+                                <div class="stask-due" style="color:#dc6e91;font-weight:700">Overdue</div>
+                            </div>
+                        </div>
+                        <div class="add-link" style="padding:6px 0">
+                            <svg fill="none" height="11" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                                 width="11">
+                                <path d="M12 5v14M5 12h14"/>
+                            </svg>
+                            Add subtask
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sec-label">Notes</div>
+                        <div class="notes-area">Waiting on quote from Rona Building Supply. If they can't do it by
+                            Monday, try Hammond Lumber as backup. TD confirmed BCX grade minimum — no CDX for
+                            load-bearing decking.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SHOW DETAIL ═══ -->
+<div class="screen" id="screen-show">
+    <div class="app-shell">
+        <div class="sidebar">
+            <div class="sb-header">
+                <div class="sb-appname">Stagecraft</div>
+                <div class="sb-appsub">Set Construction Manager</div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Navigation</div>
+                <div class="sb-item active">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <rect height="7" rx="1" width="7" x="3" y="3"/>
+                        <rect height="7" rx="1" width="7" x="14" y="3"/>
+                        <rect height="7" rx="1" width="7" x="3" y="14"/>
+                        <rect height="7" rx="1" width="7" x="14" y="14"/>
+                    </svg>
+                    Dashboard
+                </div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                        <rect height="4" rx="1" width="6" x="9" y="3"/>
+                    </svg>
+                    All tasks
+                </div>
+                <div class="sb-item">
+                    <svg fill="none" height="14" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                         width="14">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 3"/>
+                    </svg>
+                    Deadlines
+                </div>
+            </div>
+            <div class="sb-section">
+                <div class="sb-label">Shows</div>
+                <div class="show-pill active">
+                    <div class="show-dot" style="background:#639922"></div>
+                    <div class="show-pill-text">Midsummer Night</div>
+                    <div class="show-pill-count">12</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#D4537E"></div>
+                    <div class="show-pill-text">Hamlet Revival</div>
+                    <div class="show-pill-count">8</div>
+                </div>
+                <div class="show-pill">
+                    <div class="show-dot" style="background:#7F77DD"></div>
+                    <div class="show-pill-text">West Side Story</div>
+                    <div class="show-pill-count">5</div>
+                </div>
+                <div class="show-pill" style="opacity:0.5">
+                    <div class="show-dot" style="background:#38354f"></div>
+                    <div class="show-pill-text" style="color:#5f5d78">+ New show</div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="show-hero">
+                <div class="hero-top">
+                    <div>
+                        <div class="hero-title">A Midsummer Night's Dream</div>
+                        <div class="hero-meta">
+                            <div class="hero-chip">
+                                <svg fill="none" height="10" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                                     width="10">
+                                    <rect height="18" rx="2" width="18" x="3" y="4"/>
+                                    <path d="M16 2v4M8 2v4M3 10h18"/>
+                                </svg>
+                                Opens May 10, 2026
+                            </div>
+                            <span style="color:rgba(255,255,255,0.2)">·</span>
+                            <div class="hero-chip">
+                                <svg fill="none" height="10" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                                     width="10">
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <path d="M12 7v5l3 3"/>
+                                </svg>
+                                43 days to opening
+                            </div>
+                            <span style="color:rgba(255,255,255,0.2)">·</span>
+                            <div class="hero-chip">
+                                <div style="width:7px;height:7px;border-radius:50%;background:#97C459"></div>
+                                Active
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="hero-btn">Edit show</button>
+                        <button class="hero-btn primary">+ New project</button>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hs-label">Overall progress</div>
+                        <div class="hs-value">62%</div>
+                        <div class="hs-sub">7 of 12 tasks done</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hs-label">Projects</div>
+                        <div class="hs-value">4</div>
+                        <div class="hs-sub">Across show</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hs-label">Overdue</div>
+                        <div class="hs-value" style="color:#F4C0D1">2</div>
+                        <div class="hs-sub" style="color:#ED93B1">Need attention</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hs-label">Due this week</div>
+                        <div class="hs-value" style="color:#FAC775">4</div>
+                        <div class="hs-sub" style="color:#FAC775">Coming up</div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div>
+                    <div class="card-header">
+                        <div class="card-title">Projects</div>
+                        <div class="card-action">View all as list →</div>
+                    </div>
+                    <div class="project-grid">
+                        <div class="proj-card">
+                            <div class="pc-header">
+                                <div class="pc-name">Structural build</div>
+                                <div class="pc-count">5 tasks · 2 overdue</div>
+                            </div>
+                            <div class="pc-body">
+                                <div>
+                                    <div class="pp-bg">
+                                        <div class="pp-fill" style="width:40%;background:#639922"></div>
+                                    </div>
+                                    <div class="pp-meta"><span style="color:#5f5d78">2 of 5 done</span><span
+                                            style="color:#7cb82a;font-weight:700">40%</span></div>
+                                </div>
+                                <div class="pp-pills">
+                                    <div class="pp-pill" style="background:#1e0d15;color:#ED93B1">2 in progress</div>
+                                    <div class="pp-pill" style="background:#1e0e07;color:#F5C4B3">2 overdue</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="proj-card">
+                            <div class="pc-header">
+                                <div class="pc-name">Scenic paint</div>
+                                <div class="pc-count">3 tasks · on track</div>
+                            </div>
+                            <div class="pc-body">
+                                <div>
+                                    <div class="pp-bg">
+                                        <div class="pp-fill" style="width:33%;background:#D4537E"></div>
+                                    </div>
+                                    <div class="pp-meta"><span style="color:#5f5d78">1 of 3 done</span><span
+                                            style="color:#dc6e91;font-weight:700">33%</span></div>
+                                </div>
+                                <div class="pp-pills">
+                                    <div class="pp-pill" style="background:#1e0d15;color:#ED93B1">1 in progress</div>
+                                    <div class="pp-pill" style="background:#252336;color:#5f5d78">1 not started</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="proj-card">
+                            <div class="pc-header">
+                                <div class="pc-name">Props &amp; dressing</div>
+                                <div class="pc-count">2 tasks · not started</div>
+                            </div>
+                            <div class="pc-body">
+                                <div>
+                                    <div class="pp-bg">
+                                        <div class="pp-fill" style="width:0%;background:#7F77DD"></div>
+                                    </div>
+                                    <div class="pp-meta"><span style="color:#5f5d78">0 of 2 done</span><span
+                                            style="color:#5f5d78">0%</span></div>
+                                </div>
+                                <div class="pp-pills">
+                                    <div class="pp-pill" style="background:#252336;color:#5f5d78">2 not started</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="proj-card">
+                            <div class="pc-header">
+                                <div class="pc-name">Safety &amp; rigging</div>
+                                <div class="pc-count">2 tasks · needs review</div>
+                            </div>
+                            <div class="pc-body">
+                                <div>
+                                    <div class="pp-bg">
+                                        <div class="pp-fill" style="width:50%;background:#BA7517"></div>
+                                    </div>
+                                    <div class="pp-meta"><span style="color:#5f5d78">1 of 2 done</span><span
+                                            style="color:#d08a25;font-weight:700">50%</span></div>
+                                </div>
+                                <div class="pp-pills">
+                                    <div class="pp-pill" style="background:#1e1505;color:#FAC775">1 needs review</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-proj-card">
+                            <div class="add-proj-icon">+</div>
+                            <div class="add-proj-label">New project</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="deadline-row">
+                    <div>
+                        <div class="card-header">
+                            <div class="card-title">Upcoming deadlines</div>
+                            <div class="card-action">View all →</div>
+                        </div>
+                        <div class="deadline-list">
+                            <div class="deadline-item">
+                                <div class="deadline-stripe" style="background:#D85A30"></div>
+                                <div class="deadline-body">
+                                    <div class="deadline-title">Order lumber — main platform</div>
+                                    <div class="deadline-show">Structural build</div>
+                                </div>
+                                <div class="deadline-date" style="color:#dc6e91">Overdue</div>
+                            </div>
+                            <div class="deadline-item">
+                                <div class="deadline-stripe" style="background:#BA7517"></div>
+                                <div class="deadline-body">
+                                    <div class="deadline-title">Paint drop: forest backdrop</div>
+                                    <div class="deadline-show">Scenic paint</div>
+                                </div>
+                                <div class="deadline-date" style="color:#d08a25">Today</div>
+                            </div>
+                            <div class="deadline-item">
+                                <div class="deadline-stripe" style="background:#7F77DD"></div>
+                                <div class="deadline-body">
+                                    <div class="deadline-title">Rigging inspection sign-off</div>
+                                    <div class="deadline-show">Safety &amp; rigging</div>
+                                </div>
+                                <div class="deadline-date" style="color:#5f5d78">Apr 5</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-title">Recent activity</div>
+                        </div>
+                        <div class="activity-list">
+                            <div class="act-item">
+                                <div class="act-dot" style="background:#639922"></div>
+                                <div class="act-text">Marked <strong>Mix base colours</strong> as done</div>
+                                <div class="act-time">2h ago</div>
+                            </div>
+                            <div class="act-item">
+                                <div class="act-dot" style="background:#7F77DD"></div>
+                                <div class="act-text">Added subtask to <strong>Order lumber</strong></div>
+                                <div class="act-time">Yesterday</div>
+                            </div>
+                            <div class="act-item">
+                                <div class="act-dot" style="background:#D4537E"></div>
+                                <div class="act-text">Added project <strong>Props &amp; dressing</strong></div>
+                                <div class="act-time">Mar 26</div>
+                            </div>
+                            <div class="act-item">
+                                <div class="act-dot" style="background:#BA7517"></div>
+                                <div class="act-text">Changed priority on <strong>Weld cross-bracing</strong> to High
+                                </div>
+                                <div class="act-time">Mar 25</div>
+                            </div>
+                            <div class="act-item">
+                                <div class="act-dot" style="background:#639922"></div>
+                                <div class="act-text">Marked <strong>Confirm stage dimensions</strong> as done</div>
+                                <div class="act-time">Mar 24</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ CREATION FLOWS ═══ -->
+<div class="screen" id="screen-modals">
+    <div class="modal-tabs">
+        <div class="mtab active" onclick="showModal('show')">New show</div>
+        <div class="mtab" onclick="showModal('project')">New project</div>
+        <div class="mtab" onclick="showModal('task')">New task</div>
+        <div class="mtab" onclick="showModal('subtask')">New subtask</div>
+    </div>
+    <div class="modal-stage">
+        <div class="fake-bg"></div>
+        <div class="modal-overlay"></div>
+
+        <div class="modal" id="m-show">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <div class="micon" style="background:#1e1c35">
+                        <svg fill="none" height="13" stroke="#9E97E6" stroke-width="2" viewBox="0 0 24 24" width="13">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 8v4l3 3"/>
+                        </svg>
+                    </div>
+                    Create new show
+                </div>
+                <div class="mclose">✕</div>
+            </div>
+            <div class="modal-body">
+                <div class="field">
+                    <div class="flabel">Show name <span class="freq">*</span></div>
+                    <input class="finput focused" placeholder="e.g. Romeo and Juliet"></div>
+                <div class="field-row">
+                    <div class="field">
+                        <div class="flabel">Opening night <span class="freq">*</span></div>
+                        <input class="finput" placeholder="mm/dd/yyyy"></div>
+                    <div class="field">
+                        <div class="flabel">Closing night</div>
+                        <input class="finput" placeholder="mm/dd/yyyy"></div>
+                </div>
+                <div class="field">
+                    <div class="flabel">Show colour</div>
+                    <div class="color-picker">
+                        <div class="cswatch selected" style="background:#639922"></div>
+                        <div class="cswatch" style="background:#D4537E"></div>
+                        <div class="cswatch" style="background:#7F77DD"></div>
+                        <div class="cswatch" style="background:#BA7517"></div>
+                        <div class="cswatch" style="background:#D85A30"></div>
+                        <div class="cswatch" style="background:#1D9E75"></div>
+                        <div class="cswatch" style="background:#378ADD"></div>
+                    </div>
+                    <div class="fhint">Used to identify this show throughout the app</div>
+                </div>
+                <div class="field">
+                    <div class="flabel">Notes</div>
+                    <textarea class="finput" placeholder="Venue, director, any context..." rows="2"></textarea></div>
+            </div>
+            <div class="modal-footer">
+                <button class="mbtn mbtn-ghost">Cancel</button>
+                <button class="mbtn mbtn-green">Create show</button>
+            </div>
+        </div>
+
+        <div class="modal hidden" id="m-project">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <div class="micon" style="background:#141f09">
+                        <svg fill="none" height="13" stroke="#7cb82a" stroke-width="2" viewBox="0 0 24 24" width="13">
+                            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                        </svg>
+                    </div>
+                    New project
+                </div>
+                <div class="mclose">✕</div>
+            </div>
+            <div class="modal-body">
+                <div class="ctx-banner">
+                    <div class="ctx-label">Adding to show</div>
+                    <div class="ctx-value">
+                        <div style="width:8px;height:8px;border-radius:50%;background:#639922"></div>
+                        A Midsummer Night's Dream
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="flabel">Project name <span class="freq">*</span></div>
+                    <input class="finput focused" placeholder="e.g. Fly system, Costume storage..."></div>
+                <div class="field-row">
+                    <div class="field">
+                        <div class="flabel">Target start</div>
+                        <input class="finput" placeholder="mm/dd/yyyy"></div>
+                    <div class="field">
+                        <div class="flabel">Target end</div>
+                        <input class="finput" placeholder="mm/dd/yyyy"></div>
+                </div>
+                <div class="field">
+                    <div class="flabel">Notes</div>
+                    <textarea class="finput" placeholder="Scope, dependencies, anything relevant..."
+                              rows="2"></textarea></div>
+            </div>
+            <div class="modal-footer">
+                <button class="mbtn mbtn-ghost">Cancel</button>
+                <button class="mbtn mbtn-green">Create project</button>
+            </div>
+        </div>
+
+        <div class="modal hidden" id="m-task">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <div class="micon" style="background:#1e1c35">
+                        <svg fill="none" height="13" stroke="#9E97E6" stroke-width="2" viewBox="0 0 24 24" width="13">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                            <rect height="4" rx="1" width="6" x="9" y="3"/>
+                        </svg>
+                    </div>
+                    New task
+                </div>
+                <div class="mclose">✕</div>
+            </div>
+            <div class="modal-body">
+                <div class="ctx-banner">
+                    <div class="ctx-label">Adding to</div>
+                    <div class="ctx-value"><span>Midsummer Night</span><span style="color:#639922;margin:0 3px">›</span><span>Structural build</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="flabel">Task name <span class="freq">*</span></div>
+                    <input class="finput focused" placeholder="What needs to be done?"></div>
+                <div class="field">
+                    <div class="flabel">Priority</div>
+                    <div class="priority-row">
+                        <div class="popt" onclick="setPri(this,'low')">
+                            <div class="pdot" style="background:#639922"></div>
+                            Low
+                        </div>
+                        <div class="popt selected" onclick="setPri(this,'med')"
+                             style="background:#1e1505;color:#FAC775;border-color:#BA7517">
+                            <div class="pdot" style="background:#BA7517"></div>
+                            Medium
+                        </div>
+                        <div class="popt" onclick="setPri(this,'high')">
+                            <div class="pdot" style="background:#D85A30"></div>
+                            High
+                        </div>
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <div class="flabel">Due date</div>
+                        <input class="finput" placeholder="mm/dd/yyyy"></div>
+                    <div class="field">
+                        <div class="flabel">Status</div>
+                        <select class="finput">
+                            <option>Not started</option>
+                            <option>In progress</option>
+                            <option>Needs review</option>
+                            <option>Done</option>
+                        </select></div>
+                </div>
+                <div class="field">
+                    <div class="flabel">Materials</div>
+                    <div id="mat-list" style="display:flex;flex-direction:column;gap:6px">
+                        <div class="mat-row"><input class="finput" placeholder="Item name"
+                                                    style="font-size:12px;padding:6px 8px"><input class="finput"
+                                                                                                  placeholder="Spec / notes"
+                                                                                                  style="font-size:12px;padding:6px 8px"><input
+                                class="finput" placeholder="Qty" style="font-size:12px;padding:6px 8px">
+                            <div class="mat-remove" onclick="this.parentElement.remove()">−</div>
+                        </div>
+                    </div>
+                    <div class="add-link" onclick="addMat()" style="margin-top:6px">
+                        <svg fill="none" height="11" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                             width="11">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                        Add material
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="flabel">Notes</div>
+                    <textarea class="finput" placeholder="Context, reminders, supplier info..." rows="2"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="mbtn mbtn-ghost">Cancel</button>
+                <button class="mbtn mbtn-green">Create task</button>
+            </div>
+        </div>
+
+        <div class="modal hidden" id="m-subtask">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <div class="micon" style="background:#1e0d15">
+                        <svg fill="none" height="13" stroke="#dc6e91" stroke-width="2" viewBox="0 0 24 24" width="13">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                            <rect height="4" rx="1" width="6" x="9" y="3"/>
+                            <path d="M9 12h6M9 16h4"/>
+                        </svg>
+                    </div>
+                    New subtask
+                </div>
+                <div class="mclose">✕</div>
+            </div>
+            <div class="modal-body">
+                <div class="ctx-banner">
+                    <div class="ctx-label">Under task</div>
+                    <div class="ctx-value"><span>Midsummer Night</span><span style="color:#639922;margin:0 3px">›</span><span>Structural build</span><span
+                            style="color:#639922;margin:0 3px">›</span><span>Order lumber</span></div>
+                </div>
+                <div class="field">
+                    <div class="flabel">Subtask name <span class="freq">*</span></div>
+                    <input class="finput focused" placeholder="e.g. Call supplier for quote"></div>
+                <div class="field-row">
+                    <div class="field">
+                        <div class="flabel">Due date</div>
+                        <input class="finput" placeholder="mm/dd/yyyy"></div>
+                    <div class="field">
+                        <div class="flabel">Priority</div>
+                        <select class="finput">
+                            <option>Low</option>
+                            <option selected>Medium</option>
+                            <option>High</option>
+                        </select></div>
+                </div>
+                <div class="field">
+                    <div class="flabel">Notes</div>
+                    <textarea class="finput" placeholder="Any details for this step..." rows="2"></textarea></div>
+            </div>
+            <div class="modal-footer">
+                <button class="mbtn mbtn-ghost">Cancel</button>
+                <button class="mbtn mbtn-purple">Add subtask</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showScreen(name) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-' + name).classList.add('active');
+        const map = {dashboard: 0, kanban: 1, list: 2, task: 3, show: 4, modals: 5};
+        document.querySelectorAll('#main-nav .nav-tab').forEach((t, i) => t.classList.toggle('active', i === map[name]));
+    }
+
+    function showModal(name) {
+        ['show', 'project', 'task', 'subtask'].forEach(t => document.getElementById('m-' + t).classList.add('hidden'));
+        document.getElementById('m-' + name).classList.remove('hidden');
+        const map = {show: 0, project: 1, task: 2, subtask: 3};
+        document.querySelectorAll('.mtab').forEach((t, i) => t.classList.toggle('active', i === map[name]));
+    }
+
+    function addMat() {
+        const list = document.getElementById('mat-list');
+        const row = document.createElement('div');
+        row.className = 'mat-row';
+        row.innerHTML = '<input class="finput" placeholder="Item name" style="font-size:12px;padding:6px 8px"><input class="finput" placeholder="Spec / notes" style="font-size:12px;padding:6px 8px"><input class="finput" placeholder="Qty" style="font-size:12px;padding:6px 8px"><div class="mat-remove" onclick="this.parentElement.remove()">−</div>';
+        list.appendChild(row);
+    }
+
+    function setPri(el, level) {
+        document.querySelectorAll('.popt').forEach(o => {
+            o.classList.remove('selected');
+            o.style.background = '';
+            o.style.color = '';
+            o.style.borderColor = '';
+            o.style.borderWidth = '';
+        });
+        el.classList.add('selected');
+        const s = {
+            low: ['#141f09', '#C0DD97', '#639922'],
+            med: ['#1e1505', '#FAC775', '#BA7517'],
+            high: ['#1e0e07', '#F5C4B3', '#D85A30']
+        };
+        const [bg, col, brd] = s[level];
+        el.style.background = bg;
+        el.style.color = col;
+        el.style.borderColor = brd;
+        el.style.borderWidth = '2px';
+    }
+</script>
+</body>
+</html>
