@@ -4,5 +4,38 @@
     align-items: center;
     min-height: 100vh;
     width: 15vw;
+    gap: 1rem;
     background: var(--primary-background);
+}
+
+.title-container {
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: solid 3px var(--primary-border);
+}
+
+.navigation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 1rem 1rem 1rem;
+    width: 100%;
+    border-bottom: solid 3px var(--primary-border);
+}
+
+.shows-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 1rem 1rem 1rem;
+    width: 100%;
+}
+
+.nav-header {
+    font-weight: bold;
+    font-size: .85rem;
+    color: var(--tertiary-foreground);
 }

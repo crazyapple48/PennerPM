@@ -1,3 +1,28 @@
 <div class="container">
-    <h3>Navbar</h3>
+
+    @* title  *@
+    <div class="title-container">
+        <h2 class="title">Penner PM</h2>
+    </div>
+
+
+    @* navigation  *@
+    <div class="navigation-container">
+        <h4 class="nav-header">NAVIGATION</h4>
+        <div>Dashboard</div>
+        <div>All Tasks</div>
+        <div>Deadlines</div>
+    </div>
+
+    @* shows  *@
+    <div class="shows-container">
+        <h4 class="nav-header">SHOWS</h4>
+        @if (_shows is not null)
+        {
+            foreach (var show in _shows)
+            {
+                <p>@show</p>
+            }
+        }
+    </div>
 </div>
