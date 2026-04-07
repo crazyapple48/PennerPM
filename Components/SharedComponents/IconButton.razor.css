@@ -1,0 +1,17 @@
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.btn-container:active {
+    background-color: var(--p400);
+}
+
+.icon {
+    align-self: center;
+    justify-self: center;
+    padding-top: 3px;
+}

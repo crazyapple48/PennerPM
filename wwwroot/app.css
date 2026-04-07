@@ -15,6 +15,9 @@
     --secondary-foreground: #9e9bb8;
     --tertiary-foreground: #5f5d78;
 
+    /*Other Colors */
+    --active-NavLink: rgba(127, 119, 221, 0.15);
+
     /* Purple accent */
     --p900: #26215C;
     --p800: #3C3489;
@@ -84,6 +87,20 @@ body {
 
 h1:focus {
     outline: none;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--primary-foreground);
+    padding: 0.5rem 0 0.75rem 1rem;
+    width: 100%;
+    border-right: 2px solid transparent;
+}
+
+.nav-link.active {
+    background: var(--active-NavLink);
+    color: var(--p200);
+    border-right-color: var(--p400);
 }
 
 .valid.modified:not([type=checkbox]) {

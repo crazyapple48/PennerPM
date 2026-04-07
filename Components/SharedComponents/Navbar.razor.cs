@@ -4,5 +4,5 @@ namespace PennerProjectManager.Components.SharedComponents;
 
 public partial class Navbar : ComponentBase
 {
-    private List<string> _shows = ["Midsummer Night", "Hamlet Revival", "West Side Story"];
+    private readonly List<string> _shows = ["Midsummer Night", "Hamlet Revival", "West Side Story"];
 }
