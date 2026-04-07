@@ -14,4 +14,7 @@
     align-self: center;
     justify-self: center;
     padding-top: 3px;
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
 }

@@ -92,6 +92,7 @@ h1:focus {
 .nav-link {
     text-decoration: none;
     color: var(--primary-foreground);
+    fill: var(--primary-foreground);
     padding: 0.5rem 0 0.75rem 1rem;
     width: 100%;
     border-right: 2px solid transparent;
@@ -101,6 +102,7 @@ h1:focus {
     background: var(--active-NavLink);
     color: var(--p200);
     border-right-color: var(--p400);
+    fill: var(--p200);
 }
 
 .valid.modified:not([type=checkbox]) {
