@@ -98,11 +98,23 @@ h1:focus {
     border-right: 2px solid transparent;
 }
 
+.nav-link:hover {
+    background-color: var(--primary-hover-background);
+}
+
+.nav-link:active {
+    background-color: var(--p400);
+}
+
 .nav-link.active {
     background: var(--active-NavLink);
     color: var(--p200);
     border-right-color: var(--p400);
     fill: var(--p200);
+}
+
+.nav-link.active:active {
+    background-color: var(--p400);
 }
 
 .valid.modified:not([type=checkbox]) {
