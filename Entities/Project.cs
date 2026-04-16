@@ -1,6 +1,6 @@
 namespace PennerProjectManager.Models;
 
-public class ProjectDataModel(int Id, int CategoryId, string Name)
+public class Project(int Id, int CategoryId, string Name)
 {
     public int Id { get; set; }
     public int CategoryId { get; set; }
@@ -8,7 +8,7 @@ public class ProjectDataModel(int Id, int CategoryId, string Name)
     public DateOnly? StartDate { get; set; }
     public DateOnly? EndDate { get; set; }
     public string? Notes { get; set; }
-    public MainCategoryDataModel? MainCategory { get; set; }
-    public List<ProjectTaskDataModel>? Tasks { get; set; }
-    public List<ProgressDataModel>? ProgressPresets { get; set; }
+    public MainCategory? MainCategory { get; set; }
+    public List<ProjectTask>? Tasks { get; set; }
+    public List<Progress>? ProgressPresets { get; set; }
 }

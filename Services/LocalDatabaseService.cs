@@ -4,46 +4,46 @@ namespace PennerProjectManager.Services;
 
 public class LocalDatabaseService : IDatabaseService
 {
-    public List<MainCategoryDataModel> FetchMainCategories()
+    public List<MainCategory> FetchMainCategories()
     {
         return
         [
-            new MainCategoryDataModel(0, "Annie"),
-            new MainCategoryDataModel(1, "Shop Maintenance")
+            new MainCategory(0, "Annie"),
+            new MainCategory(1, "Shop Maintenance")
         ];
     }
 
-    public List<SubtaskDataModel> FetchSubtasks()
+    public List<Subtask> FetchSubtasks()
     {
         throw new NotImplementedException();
     }
 
-    public List<ProgressDataModel> FetchProgress()
+    public List<Progress> FetchProgress()
     {
         return
         [
-            new ProgressDataModel(0, "Framed"),
-            new ProgressDataModel(1, "Faced"),
-            new ProgressDataModel(2, "Trim"),
-            new ProgressDataModel(3, "Paint")
+            new Progress(0, "Framed"),
+            new Progress(1, "Faced"),
+            new Progress(2, "Trim"),
+            new Progress(3, "Paint")
         ];
     }
 
-    public ProgressPresetsDataModel FetchProgressPresets()
+    public ProgressPresets FetchProgressPresets()
     {
-        return new ProgressPresetsDataModel(0, FetchProgress());
+        return new ProgressPresets(0, FetchProgress());
     }
 
-    public List<ProjectDataModel> FetchProjects(int categoryId)
+    public List<Project> FetchProjects(int categoryId)
     {
         return
         [
-            new ProjectDataModel(0, categoryId, "Rolling Door"),
-            new ProjectDataModel(1, categoryId, "Annie Sign")
+            new Project(0, categoryId, "Rolling Door"),
+            new Project(1, categoryId, "Annie Sign")
         ];
     }
 
-    public MainCategoryDataModel FetchMainCategoryById(int categoryId)
+    public MainCategory FetchMainCategoryById(int categoryId)
     {
         var categories = FetchMainCategories();
 

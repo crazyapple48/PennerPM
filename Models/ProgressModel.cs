@@ -1,6 +1,6 @@
 namespace PennerProjectManager.ViewModels;
 
-public class ProgressViewModel(int Id, string Title)
+public class ProgressModel(int Id, string Title)
 {
     public int Id { get; set; }
     public string Title { get; set; } = string.Empty;

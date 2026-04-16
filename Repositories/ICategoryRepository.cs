@@ -4,6 +4,6 @@ namespace PennerProjectManager.Repositories;
 
 public interface ICategoryRepository
 {
-    public List<CategoryViewModel> GetAllCategories();
-    public CategoryViewModel? GetCategoryById(int id);
+    public List<CategoryModel> GetAllCategories();
+    public CategoryModel? GetCategoryById(int id);
 }

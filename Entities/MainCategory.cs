@@ -1,6 +1,6 @@
 namespace PennerProjectManager.Models;
 
-public class MainCategoryDataModel(int Id, string Name)
+public class MainCategory(int Id, string Name)
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
@@ -8,5 +8,5 @@ public class MainCategoryDataModel(int Id, string Name)
     public DateOnly? OpeningDate { get; set; }
     public DateOnly? ClosingDate { get; set; }
     public string? Notes { get; set; }
-    public List<ProjectDataModel> Projects { get; set; } = [];
+    public List<Project> Projects { get; set; } = [];
 }
