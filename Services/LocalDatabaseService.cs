@@ -4,48 +4,48 @@ namespace PennerProjectManager.Services;
 
 public class LocalDatabaseService : IDatabaseService
 {
-    public List<MainCategoryModel> GetMainCategories()
+    public List<MainCategoryDataModel> FetchMainCategories()
     {
         return
         [
-            new MainCategoryModel(0, "Annie"),
-            new MainCategoryModel(1, "Shop Maintenance")
+            new MainCategoryDataModel(0, "Annie"),
+            new MainCategoryDataModel(1, "Shop Maintenance")
         ];
     }
 
-    public List<SubtaskModel> GetSubtasks()
+    public List<SubtaskDataModel> FetchSubtasks()
     {
         throw new NotImplementedException();
     }
 
-    public List<ProgressModel> GetProgress()
+    public List<ProgressDataModel> FetchProgress()
     {
         return
         [
-            new ProgressModel(0, "Framed"),
-            new ProgressModel(1, "Faced"),
-            new ProgressModel(2, "Trim"),
-            new ProgressModel(3, "Paint")
+            new ProgressDataModel(0, "Framed"),
+            new ProgressDataModel(1, "Faced"),
+            new ProgressDataModel(2, "Trim"),
+            new ProgressDataModel(3, "Paint")
         ];
     }
 
-    public ProgressPresetsModel GetProgressPresets()
+    public ProgressPresetsDataModel FetchProgressPresets()
     {
-        return new ProgressPresetsModel(0, GetProgress());
+        return new ProgressPresetsDataModel(0, FetchProgress());
     }
 
-    public List<ProjectModel> GetProjects(int categoryId)
+    public List<ProjectDataModel> FetchProjects(int categoryId)
     {
         return
         [
-            new ProjectModel(0, categoryId, "Rolling Door"),
-            new ProjectModel(1, categoryId, "Annie Sign")
+            new ProjectDataModel(0, categoryId, "Rolling Door"),
+            new ProjectDataModel(1, categoryId, "Annie Sign")
         ];
     }
 
-    public MainCategoryModel GetMainCategoryById(int categoryId)
+    public MainCategoryDataModel FetchMainCategoryById(int categoryId)
     {
-        var categories = GetMainCategories();
+        var categories = FetchMainCategories();
 
         var mainCategory = categories[categoryId];
 

@@ -4,10 +4,10 @@ namespace PennerProjectManager.Services;
 
 public interface IDatabaseService
 {
-    public List<MainCategoryModel> GetMainCategories();
-    public MainCategoryModel GetMainCategoryById(int categoryId);
-    public List<ProjectModel> GetProjects(int categoryId);
-    public List<SubtaskModel> GetSubtasks();
-    public List<ProgressModel> GetProgress();
-    public ProgressPresetsModel GetProgressPresets();
+    public List<MainCategoryDataModel> FetchMainCategories();
+    public MainCategoryDataModel FetchMainCategoryById(int categoryId);
+    public List<ProjectDataModel> FetchProjects(int categoryId);
+    public List<SubtaskDataModel> FetchSubtasks();
+    public List<ProgressDataModel> FetchProgress();
+    public ProgressPresetsDataModel FetchProgressPresets();
 }
