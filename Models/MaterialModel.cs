@@ -1,6 +1,6 @@
 namespace PennerProjectManager.Models;
 
-public class Material
+public class MaterialModel
 {
     public int Id { get; set; }
     public int TaskId { get; set; }
@@ -8,5 +8,5 @@ public class Material
     public string? Spec { get; set; }
     public decimal Quantity { get; set; }
     public string? Unit { get; set; }
-    public ProjectTask Task { get; set; }
+    public ProjectTaskModel TaskModel { get; set; }
 }
