@@ -1,54 +1,59 @@
-using PennerProjectManager.Models;
+using PennerProjectManager.Entities;
 
 namespace PennerProjectManager.Services;
 
 public class LocalDatabaseService : IDatabaseService
 {
-    public List<MainCategory> FetchMainCategories()
+    public List<Category> FetchCategories()
     {
         return
         [
-            new MainCategory(0, "Annie"),
-            new MainCategory(1, "Shop Maintenance")
+            new Category
+            {
+                Id = 0,
+                Name = "Shop Projects"
+            },
+            new Category
+            {
+                Id = 1,
+                Name = "Annie"
+            }
         ];
     }
 
-    public List<Subtask> FetchSubtasks()
+    public Category FetchCategoryById(int categoryId)
     {
-        throw new NotImplementedException();
-    }
-
-    public List<Progress> FetchProgress()
-    {
-        return
-        [
-            new Progress(0, "Framed"),
-            new Progress(1, "Faced"),
-            new Progress(2, "Trim"),
-            new Progress(3, "Paint")
-        ];
-    }
-
-    public ProgressPresets FetchProgressPresets()
-    {
-        return new ProgressPresets(0, FetchProgress());
+        return new Category
+        {
+            Id = categoryId,
+            Name = "Shop Projects",
+            Projects =
+            [
+                new Project
+                {
+                    Id = 0,
+                    Name = "Saw Bench and Rack",
+                    CategoryId = categoryId,
+                    ProjectTasks =
+                    [
+                        new ProjectTask
+                        {
+                            Id = 0,
+                            Name = "Frame"
+                        }
+                    ]
+                }
+            ]
+        };
     }
 
     public List<Project> FetchProjects(int categoryId)
     {
-        return
-        [
-            new Project(0, categoryId, "Rolling Door"),
-            new Project(1, categoryId, "Annie Sign")
-        ];
+        throw new NotImplementedException();
     }
 
-    public MainCategory FetchMainCategoryById(int categoryId)
+    public List<ProjectTask> FetchProjectTasks(int projectId)
     {
-        var categories = FetchMainCategories();
-
-        var mainCategory = categories[categoryId];
-
-        return mainCategory;
+        throw new NotImplementedException();
     }
 }

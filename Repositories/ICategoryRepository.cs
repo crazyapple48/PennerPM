@@ -1,4 +1,4 @@
-using PennerProjectManager.ViewModels;
+using PennerProjectManager.Models;
 
 namespace PennerProjectManager.Repositories;
 

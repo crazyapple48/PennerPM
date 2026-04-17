@@ -1,16 +1,8 @@
-namespace PennerProjectManager.ViewModels;
+namespace PennerProjectManager.Models;
 
-public class ProjectModel(
-    int Id,
-    string Name,
-    List<ProjectTaskModel>? Tasks = null,
-    List<ProgressModel>? Progress = null)
+public class ProjectModel
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public DateOnly? StartDate { get; set; }
-    public DateOnly? EndDate { get; set; }
-    public string? Notes { get; set; }
-    public List<ProjectTaskModel>? Tasks { get; set; }
-    public List<ProgressModel>? Progress { get; set; }
+    public List<ProjectTaskModel>? ProjectTasks { get; set; }
 }

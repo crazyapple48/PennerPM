@@ -1,9 +1,8 @@
-namespace PennerProjectManager.ViewModels;
+namespace PennerProjectManager.Models;
 
-public class ProjectTaskModel(int Id, string Name)
+public class ProjectTaskModel
 {
     public int Id { get; set; }
-    public string Name { get; set; } = "";
-    public DateOnly? DueDate { get; set; }
-    public string? Notes { get; set; }
+    public string Name { get; set; }
+    public bool IsComplete { get; set; } = false;
 }

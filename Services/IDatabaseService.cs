@@ -1,13 +1,11 @@
-using PennerProjectManager.Models;
+using PennerProjectManager.Entities;
 
 namespace PennerProjectManager.Services;
 
 public interface IDatabaseService
 {
-    public List<MainCategory> FetchMainCategories();
-    public MainCategory FetchMainCategoryById(int categoryId);
+    public List<Category> FetchCategories();
+    public Category FetchCategoryById(int categoryId);
     public List<Project> FetchProjects(int categoryId);
-    public List<Subtask> FetchSubtasks();
-    public List<Progress> FetchProgress();
-    public ProgressPresets FetchProgressPresets();
+    public List<ProjectTask> FetchProjectTasks(int projectId);
 }

@@ -1,9 +1,8 @@
 namespace PennerProjectManager.Entities;
 
-public class ProjectTask
+public class Category
 {
     public int Id { get; set; }
-    public int ProjectId { get; set; }
     public string Name { get; set; }
-    public bool IsComplete { get; set; } = false;
+    public List<Project>? Projects { get; set; }
 }

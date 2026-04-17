@@ -1,5 +1,5 @@
+using PennerProjectManager.Models;
 using PennerProjectManager.Services;
-using PennerProjectManager.ViewModels;
 
 namespace PennerProjectManager.Repositories;
 
@@ -7,18 +7,15 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
 {
     public List<CategoryModel> GetAllCategories()
     {
-        var categories = db.FetchMainCategories();
+        var result = db.FetchCategories();
 
-        List<CategoryModel> viewModelCategories = [];
-
-        foreach (var category in categories)
-            viewModelCategories.Add(new CategoryModel(category.Id, category.Name, category.Color));
-
-        return viewModelCategories;
+        return result.Select(p => p.ToCategoryModel()).ToList();
     }
 
     public CategoryModel? GetCategoryById(int id)
     {
-        throw new NotImplementedException();
+        var result = db.FetchCategoryById(id);
+
+        return result.ToCategoryModel();
     }
 }
