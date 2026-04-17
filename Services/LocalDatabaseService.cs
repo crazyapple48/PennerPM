@@ -23,16 +23,39 @@ public class LocalDatabaseService : IDatabaseService
 
     public Category FetchCategoryById(int categoryId)
     {
+        if (categoryId == 0)
+            return new Category
+            {
+                Id = 0,
+                Name = "Shop Projects",
+                Projects =
+                [
+                    new Project
+                    {
+                        Id = 0,
+                        Name = "Saw Bench and Rack",
+                        CategoryId = categoryId,
+                        ProjectTasks =
+                        [
+                            new ProjectTask
+                            {
+                                Id = 0,
+                                Name = "Frame"
+                            }
+                        ]
+                    }
+                ]
+            };
         return new Category
         {
-            Id = categoryId,
-            Name = "Shop Projects",
+            Id = 1,
+            Name = "Annie",
             Projects =
             [
                 new Project
                 {
                     Id = 0,
-                    Name = "Saw Bench and Rack",
+                    Name = "Rolling Door",
                     CategoryId = categoryId,
                     ProjectTasks =
                     [

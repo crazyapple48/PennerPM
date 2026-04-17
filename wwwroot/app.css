@@ -94,6 +94,7 @@ h1:focus {
     color: var(--primary-foreground);
     fill: var(--primary-foreground);
     padding: 0.5rem 0 0.75rem 1rem;
+    margin-bottom: 0.5rem;
     width: 100%;
     border-right: 2px solid transparent;
 }
