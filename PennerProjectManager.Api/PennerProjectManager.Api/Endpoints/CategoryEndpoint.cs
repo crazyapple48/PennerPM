@@ -13,5 +13,11 @@ public static class CategoryEndpoint
                 return Results.Ok(categories);
             }
         );
+
+        app.MapGet("/category/{id}", (int id, ICategoryRepository repository) =>
+        {
+            var category = repository.GetCategoryById(id);
+            return Results.Ok(category);
+        });
     }
 }
