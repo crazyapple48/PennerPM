@@ -1,0 +1,26 @@
+﻿@page "/"
+@page "/{CategoryId:int}"
+
+<PageTitle>Home</PageTitle>
+
+@if (_selectedCategory is not null)
+{
+    // category title
+    <div class="header-container">
+        <h1 class="header">@_selectedCategory.Name</h1>
+    </div>
+
+    // project list
+    <div class="project-list">
+        @foreach (var project in _selectedCategory.Projects)
+        {
+            <div class="project-container">
+                <h5>@project.Name</h5>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h3>Select a Category!</h3>
+}
