@@ -1,9 +1,8 @@
-namespace PennerProjectManager.Entities;
+namespace PennerProjectManager.Api.Models;
 
-public class ProjectTask
+public class ProjectTaskModel
 {
     public int Id { get; set; }
-    public int ProjectId { get; set; }
     public string Name { get; set; }
     public bool IsComplete { get; set; } = false;
 }

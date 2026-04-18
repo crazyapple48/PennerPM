@@ -1,7 +1,7 @@
-using PennerProjectManager.Models;
-using PennerProjectManager.Services;
+using PennerProjectManager.Api.Models;
+using PennerProjectManager.Api.Services;
 
-namespace PennerProjectManager.Repositories;
+namespace PennerProjectManager.Api.Repositories;
 
 public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
 {

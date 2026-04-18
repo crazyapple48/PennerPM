@@ -1,6 +1,6 @@
-using PennerProjectManager.Entities;
+using PennerProjectManager.Api.Entities;
 
-namespace PennerProjectManager.Services;
+namespace PennerProjectManager.Api.Services;
 
 public interface IDatabaseService
 {

@@ -1,6 +1,6 @@
-using PennerProjectManager.Models;
+using PennerProjectManager.Api.Models;
 
-namespace PennerProjectManager.Repositories;
+namespace PennerProjectManager.Api.Repositories;
 
 public interface ICategoryRepository
 {

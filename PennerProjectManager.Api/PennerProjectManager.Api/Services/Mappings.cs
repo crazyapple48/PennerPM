@@ -1,7 +1,7 @@
-using PennerProjectManager.Entities;
-using PennerProjectManager.Models;
+using PennerProjectManager.Api.Entities;
+using PennerProjectManager.Api.Models;
 
-namespace PennerProjectManager.Services;
+namespace PennerProjectManager.Api.Services;
 
 public static class CategoryMappings
 {

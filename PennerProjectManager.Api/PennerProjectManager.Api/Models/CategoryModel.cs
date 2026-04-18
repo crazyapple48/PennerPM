@@ -1,8 +1,8 @@
-namespace PennerProjectManager.Web.Models;
+namespace PennerProjectManager.Api.Models;
 
 public class CategoryModel
 {
     public int Id { get; set; }
-    public required string Name { get; set; }
+    public string Name { get; set; }
     public List<ProjectModel>? Projects { get; set; }
 }

@@ -1,6 +1,4 @@
 using PennerProjectManager.Components;
-using PennerProjectManager.Repositories;
-using PennerProjectManager.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddTransient<IDatabaseService, LocalDatabaseService>();
-builder.Services.AddTransient<ICategoryRepository, LocalCategoryRepository>();
 
 var app = builder.Build();
 
