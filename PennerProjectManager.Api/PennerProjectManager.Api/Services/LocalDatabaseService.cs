@@ -15,11 +15,25 @@ public class LocalDatabaseService : IDatabaseService
                 {
                     Id = 0,
                     Name = "Rack and Workbench",
+                    ProjectTasks = [
+                    new ProjectTask
+                    {
+                        Id = 0,
+                        Name = "Frame",
+                    }
+                    ]
                 },
                 new Project
                 {
                     Id = 1,
-                    Name = "Tool Storage"
+                    Name = "Tool Storage",
+                    ProjectTasks = [
+                        new ProjectTask
+                        {
+                            Id = 0,
+                            Name = "Frame",
+                        }
+                    ]
                 }
             ]
         },
@@ -32,11 +46,25 @@ public class LocalDatabaseService : IDatabaseService
                 {
                     Id = 0,
                     Name = "Rolling Door",
+                    ProjectTasks = [
+                        new ProjectTask
+                        {
+                            Id = 0,
+                            Name = "Frame",
+                        }
+                    ]
                 },
                 new Project
                 {
                     Id = 1,
                     Name = "Signs",
+                    ProjectTasks = [
+                        new ProjectTask
+                        {
+                            Id = 0,
+                            Name = "Frame",
+                        }
+                    ]
                 }
             ]
         }
@@ -51,6 +79,16 @@ public class LocalDatabaseService : IDatabaseService
     {
         var category = _categories.FirstOrDefault(c => categoryId == c.Id);
         return category;
+    }
+
+    public void CreateCategory(Category category)
+    {
+        List<int> categoryIds = [];
+        categoryIds.AddRange(_categories.Select(c => c.Id));
+
+        if (categoryIds.Contains(category.Id)) return;
+        
+        _categories.Add(category);
     }
 
     public List<Project> FetchProjects(int categoryId)

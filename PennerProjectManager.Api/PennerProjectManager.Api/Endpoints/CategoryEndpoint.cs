@@ -1,4 +1,7 @@
-﻿using PennerProjectManager.Api.Repositories;
+﻿using Microsoft.AspNetCore.Mvc;
+using PennerProjectManager.Api.Models;
+using PennerProjectManager.Api.Records;
+using PennerProjectManager.Api.Repositories;
 
 namespace PennerProjectManager.Api.Endpoints;
 
@@ -14,10 +17,22 @@ public static class CategoryEndpoint
             }
         );
 
-        app.MapGet("/category/{id}", (int id, ICategoryRepository repository) =>
+        app.MapGet("/category/{id}", (int id, ICategoryRepository repo) =>
         {
-            var category = repository.GetCategoryById(id);
+            var category = repo.GetCategoryById(id);
             return Results.Ok(category);
         });
+
+        app.MapPost("/category",
+            ([FromBody] CategoryRequest CategoryRequest, [FromServices] ICategoryRepository repo) =>
+            {
+                var category = CategoryRequest;
+                
+                repo.PostCategory(new CategoryModel
+                {
+                    Name = category.Name,
+                    Id = 0,
+                });
+            });
     }
 }

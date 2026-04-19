@@ -14,6 +14,15 @@ public static class CategoryMappings
             Projects = category.Projects?.Select(p => p.ToProjectModel()).ToList() ?? []
         };
     }
+
+    public static Category ToCategory(this CategoryModel category)
+    {
+        return new Category
+        {
+            Name = category.Name,
+            Projects = category.Projects?.Select(p => p.ToProject()).ToList() ?? []
+        };
+    }
 }
 
 public static class ProjectMappings
@@ -27,6 +36,15 @@ public static class ProjectMappings
             ProjectTasks = project.ProjectTasks?.Select(p => p.ToProjectTaskModel()).ToList() ?? []
         };
     }
+
+    public static Project ToProject(this ProjectModel project)
+    {
+        return new Project
+        {
+            Name = project.Name,
+            ProjectTasks = project.ProjectTasks?.Select(pt => pt.ToProjectTask()).ToList() ?? []
+        };
+    }
 }
 
 public static class TaskMappings
@@ -38,6 +56,14 @@ public static class TaskMappings
             Id = task.Id,
             Name = task.Name,
             IsComplete = task.IsComplete
+        };
+    }
+
+    public static ProjectTask ToProjectTask(this ProjectTaskModel task)
+    {
+        return new ProjectTask
+        {
+            Name = task.Name,
         };
     }
 }

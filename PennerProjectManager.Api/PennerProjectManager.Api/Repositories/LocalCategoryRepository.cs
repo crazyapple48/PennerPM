@@ -16,6 +16,17 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
     {
         var result = db.FetchCategoryById(id);
 
-        return result.ToCategoryModel();
+        return result?.ToCategoryModel();
+    }
+
+    public void UpdateCategory(CategoryModel category)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void PostCategory(CategoryModel category)
+    {
+        var c = category.ToCategory();
+        db.CreateCategory(c);
     }
 }
