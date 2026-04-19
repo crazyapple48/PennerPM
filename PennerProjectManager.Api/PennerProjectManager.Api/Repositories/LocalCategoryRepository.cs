@@ -9,14 +9,14 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
     {
         var result = db.FetchCategories();
 
-        return result.Select(p => p.ToCategoryModel()).ToList();
+        return result.Select(p => p.CategoryToCategoryModel()).ToList();
     }
 
     public CategoryModel? GetCategoryById(int id)
     {
         var result = db.FetchCategoryById(id);
 
-        return result?.ToCategoryModel();
+        return result?.CategoryToCategoryModel();
     }
 
     public void UpdateCategory(CategoryModel category)
@@ -26,7 +26,7 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
 
     public void PostCategory(CategoryModel category)
     {
-        var c = category.ToCategory();
+        var c = category.CategoryModelToCategory();
         db.CreateCategory(c);
     }
 }

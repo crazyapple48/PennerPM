@@ -4,53 +4,58 @@ namespace PennerProjectManager.Api.Services;
 
 public class LocalDatabaseService : IDatabaseService
 {
-    private List<Category> _categories = 
+    private readonly List<Category> _categories =
     [
-        new Category
+        new()
         {
             Id = 0,
             Name = "Shop Projects",
-            Projects = [
+            Projects =
+            [
                 new Project
                 {
                     Id = 0,
                     Name = "Rack and Workbench",
-                    ProjectTasks = [
-                    new ProjectTask
-                    {
-                        Id = 0,
-                        Name = "Frame",
-                    }
+                    ProjectTasks =
+                    [
+                        new ProjectTask
+                        {
+                            Id = 0,
+                            Name = "Frame"
+                        }
                     ]
                 },
                 new Project
                 {
                     Id = 1,
                     Name = "Tool Storage",
-                    ProjectTasks = [
+                    ProjectTasks =
+                    [
                         new ProjectTask
                         {
                             Id = 0,
-                            Name = "Frame",
+                            Name = "Frame"
                         }
                     ]
                 }
             ]
         },
-        new Category
+        new()
         {
             Id = 1,
             Name = "Annie",
-            Projects = [
+            Projects =
+            [
                 new Project
                 {
                     Id = 0,
                     Name = "Rolling Door",
-                    ProjectTasks = [
+                    ProjectTasks =
+                    [
                         new ProjectTask
                         {
                             Id = 0,
-                            Name = "Frame",
+                            Name = "Frame"
                         }
                     ]
                 },
@@ -58,18 +63,19 @@ public class LocalDatabaseService : IDatabaseService
                 {
                     Id = 1,
                     Name = "Signs",
-                    ProjectTasks = [
+                    ProjectTasks =
+                    [
                         new ProjectTask
                         {
                             Id = 0,
-                            Name = "Frame",
+                            Name = "Frame"
                         }
                     ]
                 }
             ]
         }
     ];
-    
+
     public List<Category> FetchCategories()
     {
         return _categories;
@@ -85,9 +91,21 @@ public class LocalDatabaseService : IDatabaseService
     {
         List<int> categoryIds = [];
         categoryIds.AddRange(_categories.Select(c => c.Id));
+        var highestId = categoryIds[^1];
+
+        if (category.Id == 0)
+        {
+            var modifiedCategory = new Category
+            {
+                Id = highestId + 1,
+                Name = category.Name,
+                Projects = category.Projects
+            };
+            _categories.Add(modifiedCategory);
+        }
 
         if (categoryIds.Contains(category.Id)) return;
-        
+
         _categories.Add(category);
     }
 
