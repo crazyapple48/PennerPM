@@ -4,9 +4,9 @@ namespace PennerProjectManager.Api.Repositories;
 
 public interface ICategoryRepository
 {
-    public List<CategoryModel> GetAllCategories();
-    public CategoryModel? GetCategoryById(int id);
-    
-    public void  PostCategory(CategoryModel category);
+    public Task<List<CategoryModel>> GetAllCategories();
+    public Task<CategoryModel?> GetCategoryById(int id);
+
+    public void PostCategory(CategoryModel category);
     public void UpdateCategory(CategoryModel category);
 }

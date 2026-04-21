@@ -11,14 +11,16 @@ public static class CategoryEndpoint
     {
         app.MapGet("/categories", (ICategoryRepository repository) =>
             {
-                var categories = repository.GetAllCategories();
+                var categories = repository.GetAllCategories().Result;
+
+                if (categories == null) Results.BadRequest();
                 return Results.Ok(categories);
             }
         );
 
         app.MapGet("/categories/{id:int}", (int id, ICategoryRepository repo) =>
         {
-            var category = repo.GetCategoryById(id);
+            var category = repo.GetCategoryById(id).Result;
             return Results.Ok(category);
         });
 

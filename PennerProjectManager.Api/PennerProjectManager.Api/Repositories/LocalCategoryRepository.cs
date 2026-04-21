@@ -5,16 +5,9 @@ namespace PennerProjectManager.Api.Repositories;
 
 public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
 {
-    public List<CategoryModel> GetAllCategories()
+    public async Task<CategoryModel?> GetCategoryById(int id)
     {
-        var result = db.FetchCategories();
-
-        return result.Select(p => p.CategoryToCategoryModel()).ToList();
-    }
-
-    public CategoryModel? GetCategoryById(int id)
-    {
-        var result = db.FetchCategoryById(id);
+        var result = await db.FetchCategoryById(id);
 
         return result?.CategoryToCategoryModel();
     }
@@ -28,5 +21,12 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
     {
         var c = category.CategoryModelToCategory();
         db.CreateCategory(c);
+    }
+
+    public async Task<List<CategoryModel>> GetAllCategories()
+    {
+        var result = await db.FetchCategories();
+
+        return result.Select(p => p.CategoryToCategoryModel()).ToList();
     }
 }
