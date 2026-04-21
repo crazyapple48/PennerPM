@@ -17,10 +17,10 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
         throw new NotImplementedException();
     }
 
-    public void PostCategory(CategoryModel category)
+    public async Task PostCategory(CategoryModel category)
     {
         var c = category.CategoryModelToCategory();
-        db.CreateCategory(c);
+        await db.CreateCategory(c);
     }
 
     public async Task<List<CategoryModel>> GetAllCategories()

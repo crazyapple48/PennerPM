@@ -10,26 +10,13 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
     [
     ];
 
-    public void CreateCategory(Category category)
+    public async Task CreateCategory(Category category)
     {
-        List<int> categoryIds = [];
-        categoryIds.AddRange(_categories.Select(c => c.Id));
-        var highestId = categoryIds[^1];
+        var doesCategoryExist = db.Categories.Any(c => c.Id == category.Id);
+        if (doesCategoryExist) return;
 
-        if (category.Id == 0)
-        {
-            var modifiedCategory = new Category
-            {
-                Id = highestId + 1,
-                Name = category.Name,
-                Projects = category.Projects
-            };
-            _categories.Add(modifiedCategory);
-        }
-
-        if (categoryIds.Contains(category.Id)) return;
-
-        _categories.Add(category);
+        await db.Categories.AddAsync(category);
+        await db.SaveChangesAsync();
     }
 
     public List<Project> FetchProjects(int categoryId)
