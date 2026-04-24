@@ -16,7 +16,7 @@ namespace PennerProjectManager.Api.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +29,7 @@ namespace PennerProjectManager.Api.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -49,7 +49,7 @@ namespace PennerProjectManager.Api.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
                     IsComplete = table.Column<bool>(type: "INTEGER", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
                 },

@@ -19,8 +19,15 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
 
     public async Task PostCategory(CategoryModel category)
     {
-        var c = category.CategoryModelToCategory();
-        await db.CreateCategory(c);
+        try
+        {
+            var c = category.CategoryModelToCategory();
+            await db.CreateCategory(c);
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
     }
 
     public async Task<List<CategoryModel>> GetAllCategories()

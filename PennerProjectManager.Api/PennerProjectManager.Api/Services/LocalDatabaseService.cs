@@ -12,8 +12,14 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
 
     public async Task CreateCategory(Category category)
     {
-        var doesCategoryExist = db.Categories.Any(c => c.Id == category.Id);
-        if (doesCategoryExist) return;
+        var doesCategoryExist = db.Categories.Any(c => c.Id == category.Id || c.Name == category.Name);
+        if (doesCategoryExist)
+        {
+            throw new Exception("Category already exists");
+            return;
+        }
+
+        ;
 
         await db.Categories.AddAsync(category);
         await db.SaveChangesAsync();

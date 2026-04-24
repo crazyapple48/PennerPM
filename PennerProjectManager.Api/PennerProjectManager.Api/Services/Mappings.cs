@@ -30,8 +30,7 @@ public static class CategoryMappings
         return new CategoryModel
         {
             Name = category.Name,
-            Id = 0,
-            Projects = []
+            Projects = category.Projects?.Select(p => p.ProjectRequestToProjectModel()).ToList() ?? []
         };
     }
 }
@@ -62,8 +61,7 @@ public static class ProjectMappings
         return new ProjectModel
         {
             Name = project.Name,
-            Id = 0,
-            ProjectTasks = []
+            ProjectTasks = project.ProjectTasks?.Select(pt => pt.ProjectTaskRequestToProjectTaskModel()).ToList() ?? []
         };
     }
 }
@@ -88,7 +86,7 @@ public static class TaskMappings
         };
     }
 
-    public static ProjectTaskModel ProjectTaskRequestToProjectTaskModel(this ProjectTask task)
+    public static ProjectTaskModel ProjectTaskRequestToProjectTaskModel(this ProjectTasksRequest task)
     {
         return new ProjectTaskModel
         {

@@ -13,7 +13,7 @@ public static class CategoryEndpoint
             {
                 var categories = repository.GetAllCategories().Result;
 
-                if (categories == null) Results.BadRequest();
+                if (categories.Count <= 0) Results.BadRequest("No categories found");
                 return Results.Ok(categories);
             }
         );
@@ -25,9 +25,17 @@ public static class CategoryEndpoint
         });
 
         app.MapPost("/categories",
-            ([FromBody] CategoryRequest CategoryRequest, [FromServices] ICategoryRepository repo) =>
+            ([FromBody] CategoryRequest categoryRequest, [FromServices] ICategoryRepository repo) =>
             {
-                repo.PostCategory(CategoryRequest.CategoryRequestToCategoryModel());
+                try
+                {
+                    repo.PostCategory(categoryRequest.CategoryRequestToCategoryModel());
+                    return Results.Ok();
+                }
+                catch (Exception e)
+                {
+                    return Results.BadRequest(e.Message);
+                }
             });
     }
 }

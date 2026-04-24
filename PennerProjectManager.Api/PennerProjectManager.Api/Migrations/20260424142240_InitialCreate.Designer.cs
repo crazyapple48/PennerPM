@@ -10,7 +10,7 @@ using PennerProjectManager.Api.Data;
 namespace PennerProjectManager.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260421013630_InitialCreate")]
+    [Migration("20260424142240_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,6 +27,7 @@ namespace PennerProjectManager.Api.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -45,6 +46,7 @@ namespace PennerProjectManager.Api.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -65,6 +67,7 @@ namespace PennerProjectManager.Api.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ProjectId")

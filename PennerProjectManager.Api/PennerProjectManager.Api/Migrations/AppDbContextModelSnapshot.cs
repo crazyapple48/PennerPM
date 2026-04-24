@@ -24,6 +24,7 @@ namespace PennerProjectManager.Api.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -42,6 +43,7 @@ namespace PennerProjectManager.Api.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -62,6 +64,7 @@ namespace PennerProjectManager.Api.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ProjectId")
