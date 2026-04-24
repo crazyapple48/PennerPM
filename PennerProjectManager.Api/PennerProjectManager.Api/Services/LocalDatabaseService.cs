@@ -16,7 +16,6 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
         if (doesCategoryExist)
         {
             throw new Exception("Category already exists");
-            return;
         }
 
         await db.Categories.AddAsync(category);
