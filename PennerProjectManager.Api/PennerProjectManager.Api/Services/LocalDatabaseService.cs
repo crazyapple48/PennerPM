@@ -19,8 +19,6 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
             return;
         }
 
-        ;
-
         await db.Categories.AddAsync(category);
         await db.SaveChangesAsync();
     }
