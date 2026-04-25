@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PennerProjectManager.Api.Data;
 using PennerProjectManager.Api.Entities;
+using PennerProjectManager.Api.Models;
 
 namespace PennerProjectManager.Api.Services;
 
@@ -13,23 +14,22 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
     public async Task CreateCategory(Category category)
     {
         var doesCategoryExist = db.Categories.Any(c => c.Id == category.Id || c.Name == category.Name);
-        if (doesCategoryExist)
-        {
-            throw new Exception("Category already exists");
-        }
+        if (doesCategoryExist) throw new Exception("Category already exists");
 
         await db.Categories.AddAsync(category);
         await db.SaveChangesAsync();
     }
 
-    public List<Project> FetchProjects(int categoryId)
+    public Project? FetchProjectByName(ProjectModel project)
     {
-        throw new NotImplementedException();
+        var result = db.Projects.Include(p => p.ProjectTasks).FirstOrDefault(p => p.Name == project.Name);
+
+        return result ?? null;
     }
 
-    public List<ProjectTask> FetchProjectTasks(int projectId)
+    public ProjectTask? FetchProjectTaskByName(ProjectTaskModel projectTask)
     {
-        throw new NotImplementedException();
+        return db.ProjectTasks.FirstOrDefault(t => t.Name == projectTask.Name) ?? null;
     }
 
     public async Task<List<Category>> FetchCategories()
@@ -42,8 +42,6 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
 
     public async Task<Category?> FetchCategoryById(int categoryId)
     {
-        if (categoryId == null) return null;
-
         var category = await db.Categories.Include(c => c.Projects).ThenInclude(p => p.ProjectTasks)
             .FirstOrDefaultAsync(c => c.Id == categoryId);
 
