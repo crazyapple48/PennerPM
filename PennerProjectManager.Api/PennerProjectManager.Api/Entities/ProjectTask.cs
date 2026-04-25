@@ -10,6 +10,5 @@ public class ProjectTask
 
     public bool IsComplete { get; set; }
 
-    public int ProjectId { get; set; }
-    public Project Project { get; set; } = null!;
+    public List<Project> Projects { get; set; } = null!;
 }

@@ -10,7 +10,7 @@ using PennerProjectManager.Api.Data;
 namespace PennerProjectManager.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260424142240_InitialCreate")]
+    [Migration("20260425192707_Initial Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -18,6 +18,21 @@ namespace PennerProjectManager.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.6");
+
+            modelBuilder.Entity("CategoriesToProjectsJoinTable", b =>
+                {
+                    b.Property<int>("CategoriesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CategoriesId", "ProjectsId");
+
+                    b.HasIndex("ProjectsId");
+
+                    b.ToTable("CategoriesToProjectsJoinTable");
+                });
 
             modelBuilder.Entity("PennerProjectManager.Api.Entities.Category", b =>
                 {
@@ -41,17 +56,12 @@ namespace PennerProjectManager.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Projects");
                 });
@@ -70,46 +80,54 @@ namespace PennerProjectManager.Api.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("ProjectTasks");
                 });
 
-            modelBuilder.Entity("PennerProjectManager.Api.Entities.Project", b =>
+            modelBuilder.Entity("ProjectsToProjectTasksJoinTable", b =>
                 {
-                    b.HasOne("PennerProjectManager.Api.Entities.Category", "Category")
-                        .WithMany("Projects")
-                        .HasForeignKey("CategoryId")
+                    b.Property<int>("ProjectTasksId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ProjectTasksId", "ProjectsId");
+
+                    b.HasIndex("ProjectsId");
+
+                    b.ToTable("ProjectsToProjectTasksJoinTable");
+                });
+
+            modelBuilder.Entity("CategoriesToProjectsJoinTable", b =>
+                {
+                    b.HasOne("PennerProjectManager.Api.Entities.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.HasOne("PennerProjectManager.Api.Entities.Project", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("PennerProjectManager.Api.Entities.ProjectTask", b =>
+            modelBuilder.Entity("ProjectsToProjectTasksJoinTable", b =>
                 {
-                    b.HasOne("PennerProjectManager.Api.Entities.Project", "Project")
-                        .WithMany("ProjectTasks")
-                        .HasForeignKey("ProjectId")
+                    b.HasOne("PennerProjectManager.Api.Entities.ProjectTask", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectTasksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Project");
-                });
-
-            modelBuilder.Entity("PennerProjectManager.Api.Entities.Category", b =>
-                {
-                    b.Navigation("Projects");
-                });
-
-            modelBuilder.Entity("PennerProjectManager.Api.Entities.Project", b =>
-                {
-                    b.Navigation("ProjectTasks");
+                    b.HasOne("PennerProjectManager.Api.Entities.Project", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

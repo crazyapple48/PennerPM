@@ -15,13 +15,11 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     {
         modelBuilder.Entity<Category>()
             .HasMany(c => c.Projects)
-            .WithOne(p => p.Category)
-            .HasForeignKey(p => p.CategoryId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .WithMany(p => p.Categories)
+            .UsingEntity("CategoriesToProjectsJoinTable");
         modelBuilder.Entity<Project>()
             .HasMany(p => p.ProjectTasks)
-            .WithOne(pt => pt.Project)
-            .HasForeignKey(pt => pt.ProjectId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .WithMany(pt => pt.Projects)
+            .UsingEntity("ProjectsToProjectTasksJoinTable");
     }
 }
