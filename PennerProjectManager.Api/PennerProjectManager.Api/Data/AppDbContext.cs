@@ -21,5 +21,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasMany(p => p.ProjectTasks)
             .WithMany(pt => pt.Projects)
             .UsingEntity("ProjectsToProjectTasksJoinTable");
+
+        modelBuilder.Entity<Project>()
+            .HasIndex(p => p.Name)
+            .IsUnique();
+
+        modelBuilder.Entity<ProjectTask>()
+            .HasIndex(pt => pt.Name)
+            .IsUnique();
     }
 }

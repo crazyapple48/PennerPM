@@ -10,8 +10,8 @@ using PennerProjectManager.Api.Data;
 namespace PennerProjectManager.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260425192707_Initial Create")]
-    partial class InitialCreate
+    [Migration("20260425222600_Initial_Create")]
+    partial class Initial_Create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,9 @@ namespace PennerProjectManager.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Projects");
                 });
 
@@ -81,6 +84,9 @@ namespace PennerProjectManager.Api.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("ProjectTasks");
                 });

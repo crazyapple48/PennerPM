@@ -5,7 +5,7 @@
 namespace PennerProjectManager.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial_Create : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -104,9 +104,21 @@ namespace PennerProjectManager.Api.Migrations
                 column: "ProjectsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Projects_Name",
+                table: "Projects",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProjectsToProjectTasksJoinTable_ProjectsId",
                 table: "ProjectsToProjectTasksJoinTable",
                 column: "ProjectsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectTasks_Name",
+                table: "ProjectTasks",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />
