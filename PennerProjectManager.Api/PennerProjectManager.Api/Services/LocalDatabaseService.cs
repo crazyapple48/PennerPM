@@ -55,4 +55,12 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
     {
         return db.ProjectTasks.FirstOrDefault(t => t.Name == projectTask.Name) ?? null;
     }
+
+    public ProjectTask CreateProjectTask(ProjectTask projectTask)
+    {
+        var result = db.ProjectTasks.Add(projectTask);
+        db.SaveChangesAsync();
+        
+        return result.Entity;
+    }
 }

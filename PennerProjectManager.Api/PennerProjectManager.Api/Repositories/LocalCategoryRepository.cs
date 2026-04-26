@@ -67,6 +67,7 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
 
     public ProjectTask GetOrCreateProjectTask(ProjectTaskModel taskModel)
     {
-        return db.FetchProjectTaskByName(taskModel) ?? new ProjectTask { Name = taskModel.Name };
+        var task = db.FetchProjectTaskByName(taskModel) ?? db.CreateProjectTask(taskModel.ProjectTaskModelToProjectTask());
+        return task;
     }
 }

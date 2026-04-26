@@ -11,4 +11,5 @@ public interface IDatabaseService
     public Task DeleteCategory(Category category);
     public Project? FetchProjectByName(ProjectModel project);
     public ProjectTask? FetchProjectTaskByName(ProjectTaskModel projectTask);
+    public ProjectTask CreateProjectTask(ProjectTask projectTask);
 }
