@@ -8,6 +8,7 @@ public interface IDatabaseService
     public Task<List<Category>> FetchCategories();
     public Task<Category?> FetchCategoryById(int categoryId);
     public Task CreateCategory(Category category);
+    public Task DeleteCategory(Category category);
     public Project? FetchProjectByName(ProjectModel project);
     public ProjectTask? FetchProjectTaskByName(ProjectTaskModel projectTask);
 }

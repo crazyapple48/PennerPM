@@ -37,5 +37,19 @@ public static class CategoryEndpoint
                     return Results.BadRequest(e.Message);
                 }
             });
+
+        app.MapDelete("categories/{id:int}", ([FromRoute] int id, [FromServices] ICategoryRepository repo) =>
+        {
+            try
+            {
+                repo.DeleteCategory(id);
+                return Results.Ok();
+            }
+
+            catch (Exception e)
+            {
+                return Results.BadRequest(e.Message);
+            }
+        });
     }
 }

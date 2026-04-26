@@ -20,17 +20,6 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
         await db.SaveChangesAsync();
     }
 
-    public Project? FetchProjectByName(ProjectModel project)
-    {
-        var result = db.Projects.Include(p => p.ProjectTasks).FirstOrDefault(p => p.Name == project.Name);
-
-        return result ?? null;
-    }
-
-    public ProjectTask? FetchProjectTaskByName(ProjectTaskModel projectTask)
-    {
-        return db.ProjectTasks.FirstOrDefault(t => t.Name == projectTask.Name) ?? null;
-    }
 
     public async Task<List<Category>> FetchCategories()
     {
@@ -46,5 +35,24 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
             .FirstOrDefaultAsync(c => c.Id == categoryId);
 
         return category;
+    }
+
+    public async Task DeleteCategory(Category category)
+    {
+        if (category is null) throw new Exception("Category does not exist");
+        db.Categories.Remove(category);
+        await db.SaveChangesAsync();
+    }
+
+    public Project? FetchProjectByName(ProjectModel project)
+    {
+        var result = db.Projects.Include(p => p.ProjectTasks).FirstOrDefault(p => p.Name == project.Name);
+
+        return result ?? null;
+    }
+
+    public ProjectTask? FetchProjectTaskByName(ProjectTaskModel projectTask)
+    {
+        return db.ProjectTasks.FirstOrDefault(t => t.Name == projectTask.Name) ?? null;
     }
 }

@@ -18,6 +18,13 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
         throw new NotImplementedException();
     }
 
+    public async Task DeleteCategory(int id)
+    {
+        var category = await db.FetchCategoryById(id);
+        if (category is null) throw new Exception("Category does not exist");
+        await db.DeleteCategory(category);
+    }
+
     public async Task<Category> PostCategory(CategoryModel category)
     {
         var entity = new Category { Name = category.Name };
