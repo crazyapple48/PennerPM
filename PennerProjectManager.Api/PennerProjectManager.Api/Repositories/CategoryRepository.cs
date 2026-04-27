@@ -4,7 +4,7 @@ using PennerProjectManager.Api.Services;
 
 namespace PennerProjectManager.Api.Repositories;
 
-public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
+public class CategoryRepository(IDatabaseService db, IRepositoryHelperService repoHelp) : ICategoryRepository
 {
     public async Task<CategoryModel?> GetCategoryById(int id)
     {
@@ -30,7 +30,7 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
         var entity = new Category { Name = category.Name };
 
         if (category.Projects.Count > 0)
-            foreach (var projectModel in category.Projects.Select(GetOrCreateProject))
+            foreach (var projectModel in category.Projects.Select(repoHelp.GetOrCreateProject))
                 entity.Projects.Add(projectModel);
 
         await db.CreateCategory(entity);
@@ -42,32 +42,5 @@ public class LocalCategoryRepository(IDatabaseService db) : ICategoryRepository
         var result = await db.FetchCategories();
 
         return result.Select(p => p.CategoryToCategoryModel()).ToList();
-    }
-
-    public Project GetOrCreateProject(ProjectModel project)
-    {
-        var existing = db.FetchProjectByName(project);
-
-        if (existing is null)
-            return new Project
-            {
-                Name = project.Name,
-                ProjectTasks = project.ProjectTasks?.Select(t => GetOrCreateProjectTask(t)).ToList() ?? []
-            };
-
-        if (project.ProjectTasks is null) return existing;
-
-        foreach (var task in project.ProjectTasks.Select(GetOrCreateProjectTask)
-                     .Where(task =>
-                         existing.ProjectTasks != null && existing.ProjectTasks.All(t => t.Name != task.Name)))
-            existing.ProjectTasks?.Add(task);
-
-        return existing;
-    }
-
-    public ProjectTask GetOrCreateProjectTask(ProjectTaskModel taskModel)
-    {
-        var task = db.FetchProjectTaskByName(taskModel) ?? db.CreateProjectTask(taskModel.ProjectTaskModelToProjectTask());
-        return task;
     }
 }

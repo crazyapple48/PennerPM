@@ -13,13 +13,4 @@ public interface ICategoryRepository
     public void UpdateCategory(CategoryModel category);
 
     public Task DeleteCategory(int id);
-
-
-    #region Helper Methods
-
-    public Project GetOrCreateProject(ProjectModel project);
-
-    public ProjectTask GetOrCreateProjectTask(ProjectTaskModel taskModel);
-
-    #endregion
 }
