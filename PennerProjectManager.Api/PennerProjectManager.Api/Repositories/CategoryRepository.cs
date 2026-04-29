@@ -13,11 +13,6 @@ public class CategoryRepository(IDatabaseService db, IRepositoryHelperService re
         return result?.CategoryToCategoryModel();
     }
 
-    public void UpdateCategory(CategoryModel category)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task DeleteCategory(int id)
     {
         var category = await db.FetchCategoryById(id);
@@ -42,5 +37,22 @@ public class CategoryRepository(IDatabaseService db, IRepositoryHelperService re
         var result = await db.FetchCategories();
 
         return result.Select(p => p.CategoryToCategoryModel()).ToList();
+    }
+
+    public async Task UpdateCategory(CategoryModel category, int id)
+    {
+        var existingCategory = await db.FetchCategoryById(id);
+
+        if (existingCategory is null) throw new Exception("Category does not exist");
+
+        existingCategory.Name = category.Name;
+
+        existingCategory.Projects.Clear();
+
+        if (category.Projects.Count > 0)
+            foreach (var projectModel in category.Projects.Select(repoHelp.GetOrCreateProject))
+                existingCategory.Projects.Add(projectModel);
+
+        await db.UpdateCategory(existingCategory);
     }
 }

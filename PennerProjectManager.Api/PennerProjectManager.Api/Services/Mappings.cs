@@ -29,6 +29,7 @@ public static class CategoryMappings
     {
         return new CategoryModel
         {
+            Id = category.Id,
             Name = category.Name,
             Projects = category.Projects?.Select(p => p.ProjectRequestToProjectModel()).ToList() ?? []
         };

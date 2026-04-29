@@ -10,7 +10,7 @@ public interface ICategoryRepository
 
     public Task<Category> PostCategory(CategoryModel category);
 
-    public void UpdateCategory(CategoryModel category);
+    public Task UpdateCategory(CategoryModel category, int id);
 
     public Task DeleteCategory(int id);
 }

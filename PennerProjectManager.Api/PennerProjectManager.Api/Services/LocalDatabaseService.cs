@@ -37,6 +37,21 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
         return category;
     }
 
+    public async Task UpdateCategory(Category category)
+    {
+        if (category is null) throw new Exception("Category does not exist");
+        db.Categories.Update(category);
+
+        try
+        {
+            await db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+
     public async Task DeleteCategory(Category category)
     {
         if (category is null) throw new Exception("Category does not exist");
@@ -60,7 +75,7 @@ public class LocalDatabaseService(AppDbContext db) : IDatabaseService
     {
         var result = db.ProjectTasks.Add(projectTask);
         db.SaveChangesAsync();
-        
+
         return result.Entity;
     }
 }

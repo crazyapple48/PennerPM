@@ -51,5 +51,21 @@ public static class CategoryEndpoint
                 return Results.BadRequest(e.Message);
             }
         });
+
+        app.MapPut("categories/{id:int}",
+            ([FromRoute] int id, [FromBody] CategoryRequest categoryRequest, [FromServices] ICategoryRepository repo) =>
+            {
+                try
+                {
+                    // handle the patch request
+                    repo.UpdateCategory(categoryRequest.CategoryRequestToCategoryModel(), id);
+
+                    return Results.Ok();
+                }
+                catch (Exception e)
+                {
+                    return Results.BadRequest(e.Message);
+                }
+            });
     }
 }

@@ -1,3 +1,3 @@
 ﻿namespace PennerProjectManager.Api.Records;
 
-public record CategoryRequest(string Name, List<ProjectRequest>? Projects);
+public record CategoryRequest(int Id, string Name, List<ProjectRequest>? Projects);
