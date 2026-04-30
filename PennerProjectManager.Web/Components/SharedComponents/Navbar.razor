@@ -11,7 +11,11 @@
     @* navigation  *@
     <div class="navigation-container">
         <h4 class="nav-header">NAVIGATION</h4>
-        @if (_categories is not null)
+        @if (!_categories.Any())
+        {
+            <p>Loading...</p>
+        }
+        else
         {
             foreach (var category in _categories)
             {

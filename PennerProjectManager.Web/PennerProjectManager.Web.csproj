@@ -5,13 +5,11 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
-        <RootNamespace>PennerProjectManager</RootNamespace>
+        <RootNamespace>PennerProjectManager.Web</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Entities\" />
-      <Folder Include="Repositories\" />
-      <Folder Include="Services\" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.7"/>
     </ItemGroup>
 
 </Project>

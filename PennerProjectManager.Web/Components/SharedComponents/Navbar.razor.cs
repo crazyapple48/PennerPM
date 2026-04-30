@@ -1,20 +1,21 @@
 using Microsoft.AspNetCore.Components;
 using PennerProjectManager.Web.Models;
+using PennerProjectManager.Web.Services;
 
-namespace PennerProjectManager.Components.SharedComponents;
+namespace PennerProjectManager.Web.Components.SharedComponents;
 
-public partial class Navbar : ComponentBase
+public partial class Navbar(ICategoryClientService client) : ComponentBase
 {
-    private List<CategoryModel> _categories = [];
+    private IEnumerable<CategoryModel> _categories = [];
 
-    private void FetchCategories()
+    private async Task FetchCategories()
     {
-
+        _categories = await client.GetAllCategories() ?? [];
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        FetchCategories();
-        base.OnInitialized();
+        await FetchCategories();
+        await base.OnInitializedAsync();
     }
 }

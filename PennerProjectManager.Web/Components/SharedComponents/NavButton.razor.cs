@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace PennerProjectManager.Components.SharedComponents;
+namespace PennerProjectManager.Web.Components.SharedComponents;
 
 public partial class NavButton : ComponentBase
 {

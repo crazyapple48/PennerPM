@@ -1,4 +1,5 @@
-using PennerProjectManager.Components;
+using PennerProjectManager.Web.Components;
+using PennerProjectManager.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddHttpClient("WebAPI", client => client.BaseAddress = new Uri("http://localhost:5094"));
+
+builder.Services.AddScoped<ICategoryClientService, CategoryClientService>();
 
 var app = builder.Build();
 
