@@ -1,0 +1,33 @@
+.project-list-container {
+    display: flex;
+    flex-direction: column;
+    background: var(--side-background);
+    gap: 1rem;
+    flex-grow: 1;
+}
+
+.scrollable {
+    overflow-y: auto;
+
+    /*Firefox*/
+    scrollbar-width: none;
+    scrollbar-color: var(--primary-border) var(--side-background);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-border);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-hover-background);
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--side-background);
+}

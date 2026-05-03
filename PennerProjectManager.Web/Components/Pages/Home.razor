@@ -18,18 +18,19 @@ else
     <div class="header-container">
         <h1 class="header">@_selectedCategory.Name</h1>
     </div>
-
     // project list
-    @foreach (var project in _selectedCategory.Projects ?? [])
-    {
-        <div>
-            <h2>@project.Name</h2>
-            <ul>
-                @foreach (var task in project.ProjectTasks ?? [])
-                {
-                    <li>@task.Name</li>
-                }
-            </ul>
-        </div>
-    }
+    <div class="project-list-container scrollable">
+        @foreach (var project in _selectedCategory.Projects ?? [])
+        {
+            <div class="project-container">
+                <h2>@project.Name</h2>
+                <ul>
+                    @foreach (var task in project.ProjectTasks ?? [])
+                    {
+                        <li>@task.Name</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
 }
