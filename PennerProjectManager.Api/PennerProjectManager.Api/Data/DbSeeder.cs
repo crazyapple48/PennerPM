@@ -8,33 +8,20 @@ public class DbSeeder
     {
         if (db.Categories.Any()) return;
 
-        var task1 = new ProjectTask { Name = "Frame" };
+        List<ProjectTask> tasks = [];
 
+        for (var i = 0; i < 20; i++) tasks.Add(new ProjectTask { Name = $"Task {i}" });
+
+        List<Project> projects = [];
+
+        for (var i = 0; i < 20; i++) projects.Add(new Project { Name = $"Project {i}", ProjectTasks = tasks });
 
         List<Category> categories =
         [
             new()
             {
                 Name = "Shop Projects",
-                Projects =
-                [
-                    new Project
-                    {
-                        Name = "Rack and Workbench",
-                        ProjectTasks =
-                        [
-                            task1
-                        ]
-                    },
-                    new Project
-                    {
-                        Name = "Tool Storage",
-                        ProjectTasks =
-                        [
-                            task1
-                        ]
-                    }
-                ]
+                Projects = projects
             },
             new()
             {
@@ -46,7 +33,7 @@ public class DbSeeder
                         Name = "Rolling Door",
                         ProjectTasks =
                         [
-                            task1
+                            tasks[0]
                         ]
                     },
                     new Project
@@ -54,7 +41,7 @@ public class DbSeeder
                         Name = "Signs",
                         ProjectTasks =
                         [
-                            task1
+                            tasks[0]
                         ]
                     }
                 ]
