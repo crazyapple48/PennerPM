@@ -14,6 +14,14 @@
     scrollbar-color: var(--primary-border) var(--side-background);
 }
 
+.task-list {
+    display: none;
+}
+
+.task-list.active {
+    display: block;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
     display: none;

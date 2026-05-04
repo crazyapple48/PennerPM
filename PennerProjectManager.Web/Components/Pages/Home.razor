@@ -22,9 +22,10 @@ else
     <div class="project-list-container scrollable">
         @foreach (var project in _selectedCategory.Projects ?? [])
         {
-            <div class="project-container">
+            <div class="project-container" onclick="@(() => OnProjectSelected(project))">
                 <h2>@project.Name</h2>
-                <ul>
+                <ul class="task-list @(_isProjectSelected && _selectedProject?.Id == project.Id ? "active" : "")"
+                    id="@("task" + project.Id)">
                     @foreach (var task in project.ProjectTasks ?? [])
                     {
                         <li>@task.Name</li>
