@@ -14,13 +14,32 @@
     scrollbar-color: var(--primary-border) var(--side-background);
 }
 
+.project-container {
+    border: 1px solid var(--primary-border);
+    border-radius: 10px;
+    background: var(--side-background);
+    padding: 12px;
+}
+
 .task-list {
-    display: none;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    border: none;
 }
 
 .task-list.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid var(--primary-border);
+    border-radius: 10px;
+    background: var(--primary-background);
+    height: auto;
 }
+
 
 ::-webkit-scrollbar {
     width: 8px;

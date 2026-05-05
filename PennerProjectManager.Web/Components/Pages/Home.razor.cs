@@ -28,14 +28,12 @@ public partial class Home : ComponentBase
         if (_isProjectSelected)
         {
             _isProjectSelected = false;
-            Console.WriteLine("clicked " + project.Name + " is " + _isProjectSelected);
             StateHasChanged();
         }
         else
         {
             _selectedProject = project;
             _isProjectSelected = true;
-            Console.WriteLine("clicked " + project.Name + " is " + _isProjectSelected);
             StateHasChanged();
         }
     }
