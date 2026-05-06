@@ -52,6 +52,13 @@ public static class CategoryEndpoint
             }
         });
 
+        app.MapDelete("categories/{categoryId:int}/projects/{projectId:int}", async ([FromRoute] int categoryId,
+            [FromRoute] int projectId, [FromServices] ICategoryRepository repo) =>
+        {
+            var success = await repo.RemoveProjectFromCategory(categoryId, projectId);
+            return success ? Results.Ok() : Results.BadRequest("Project not found in category");
+        });
+
         app.MapPut("categories/{id:int}",
             ([FromRoute] int id, [FromBody] CategoryRequest categoryRequest, [FromServices] ICategoryRepository repo) =>
             {

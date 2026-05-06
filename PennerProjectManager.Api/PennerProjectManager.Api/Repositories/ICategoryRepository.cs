@@ -13,4 +13,6 @@ public interface ICategoryRepository
     public Task UpdateCategory(CategoryModel category, int id);
 
     public Task DeleteCategory(int id);
+
+    public Task<bool> RemoveProjectFromCategory(int categoryId, int projectId);
 }

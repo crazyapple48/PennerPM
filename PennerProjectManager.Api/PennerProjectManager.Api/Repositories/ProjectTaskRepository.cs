@@ -1,7 +1,7 @@
-using PennerProjectManager.Api.Services;
+using PennerProjectManager.Api.Data;
 
 namespace PennerProjectManager.Api.Repositories;
 
-public class ProjectTaskRepository(IDatabaseService db) : IProjectTaskRepository
+public class ProjectTaskRepository(AppDbContext db) : IProjectTaskRepository
 {
 }

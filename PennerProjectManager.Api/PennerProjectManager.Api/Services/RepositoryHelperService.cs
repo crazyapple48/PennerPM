@@ -1,13 +1,30 @@
+using Microsoft.EntityFrameworkCore;
+using PennerProjectManager.Api.Data;
 using PennerProjectManager.Api.Entities;
 using PennerProjectManager.Api.Models;
 
 namespace PennerProjectManager.Api.Services;
 
-public class RepositoryHelperService(IDatabaseService db) : IRepositoryHelperService
+public class RepositoryHelperService(AppDbContext db) : IRepositoryHelperService
 {
+    public ProjectTask GetOrCreateProjectTask(ProjectTaskModel taskModel)
+    {
+        var task = db.ProjectTasks.FirstOrDefault(t => t.Name == taskModel.Name);
+
+        if (task is null)
+        {
+            db.ProjectTasks.Add(taskModel.ProjectTaskModelToProjectTask());
+            db.SaveChanges();
+            task = db.ProjectTasks.FirstOrDefault(t => t.Name == taskModel.Name);
+        }
+
+        return task;
+    }
+
     public Project GetOrCreateProject(ProjectModel project)
     {
-        var existing = db.FetchProjectByName(project);
+        var existing = db.Projects.Include(p => p.ProjectTasks)
+            .FirstOrDefault(p => p.Name == project.Name);
 
         if (existing is null)
             return new Project
@@ -24,12 +41,5 @@ public class RepositoryHelperService(IDatabaseService db) : IRepositoryHelperSer
             existing.ProjectTasks?.Add(task);
 
         return existing;
-    }
-
-    public ProjectTask GetOrCreateProjectTask(ProjectTaskModel taskModel)
-    {
-        var task = db.FetchProjectTaskByName(taskModel) ??
-                   db.CreateProjectTask(taskModel.ProjectTaskModelToProjectTask());
-        return task;
     }
 }
