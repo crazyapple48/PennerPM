@@ -10,8 +10,7 @@
     border-bottom: 2px solid var(--primary-border);
 }
 
-
-.checkbox-label {
+.checkbox-container {
     display: flex;
     align-items: center;
     gap: 1.5rem;
@@ -33,4 +32,8 @@
 .icon:hover {
     cursor: pointer;
     color: var(--primary-hover-background);
+}
+
+.checked {
+    text-decoration: line-through;
 }

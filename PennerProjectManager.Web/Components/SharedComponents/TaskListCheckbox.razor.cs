@@ -4,11 +4,12 @@ namespace PennerProjectManager.Web.Components.SharedComponents;
 
 public partial class TaskListCheckbox : ComponentBase
 {
-    [Parameter] public bool IsChecked { get; set; }
+    private bool _isChecked;
     [Parameter] public string TaskName { get; set; } = string.Empty;
 
-    private void OnClicked()
+    private void OnCheckboxClicked()
     {
-        IsChecked = !IsChecked;
+        _isChecked = !_isChecked;
+        StateHasChanged();
     }
 }

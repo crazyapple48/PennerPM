@@ -1,8 +1,12 @@
+@rendermode InteractiveServer
+
 <div class="container">
-    <label class="checkbox-label">
-        <input type="checkbox"/>
-        @TaskName
-    </label>
+    <div class="checkbox-container" onclick="@(() => OnCheckboxClicked())">
+        <input type="checkbox" checked="@_isChecked" @onclick:stopPropagation="true"/>
+        <label class='@(_isChecked ? "checkbox-label checked" : "checkbox-label")'>
+            @TaskName
+        </label>
+    </div>
     <div class="button-group">
         <i class="fa-solid fa-pen icon"></i>
         <i class="fa-solid fa-trash icon"></i>

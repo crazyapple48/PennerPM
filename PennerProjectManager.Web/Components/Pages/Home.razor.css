@@ -1,3 +1,22 @@
+
+::-webkit-scrollbar {
+    width: 8px;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-border);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-hover-background);
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--side-background);
+}
+
 .header-container {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -83,21 +102,15 @@
     height: auto;
 }
 
-
-::-webkit-scrollbar {
-    width: 8px;
-    display: none;
+.add-project-button {
+    border-radius: 2rem;
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem 0.5rem;
 }
 
-::-webkit-scrollbar-thumb {
-    background-color: var(--primary-border);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
+.add-project-button:hover {
     background-color: var(--primary-hover-background);
-}
-
-::-webkit-scrollbar-track {
-    background-color: var(--side-background);
+    color: var(--primary-foreground);
 }
