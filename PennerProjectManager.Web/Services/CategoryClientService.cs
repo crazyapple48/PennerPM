@@ -20,4 +20,11 @@ public class CategoryClientService : ICategoryClientService
     {
         return await _httpClient.GetFromJsonAsync<CategoryModel>($"categories/{id}");
     }
+
+    public async Task<bool> DeleteProjectFromCategoryById(int categoryId, int projectId)
+    {
+        var success = await _httpClient.DeleteAsync($"categories/{categoryId}/projects/{projectId}");
+
+        return success.IsSuccessStatusCode;
+    }
 }

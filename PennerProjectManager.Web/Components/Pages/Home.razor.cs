@@ -17,10 +17,13 @@ public partial class Home : ComponentBase
 
     protected override async Task OnParametersSetAsync()
     {
+        await FetchCategory();
+    }
+
+    private async Task FetchCategory()
+    {
         if (CategoryId is not null)
             _selectedCategory = await CategoryClientService.GetCategoryById(CategoryId.Value);
-        else
-            _selectedCategory = null;
     }
 
     private void OnProjectSelected(ProjectModel project)
@@ -34,6 +37,19 @@ public partial class Home : ComponentBase
         {
             _selectedProject = project;
             _isProjectSelected = true;
+            StateHasChanged();
+        }
+    }
+
+    private async Task DeleteProjectFromCategory(ProjectModel project)
+    {
+        Console.WriteLine("Delete button clicked");
+        if (_selectedCategory is null) return;
+        var success = await CategoryClientService.DeleteProjectFromCategoryById(_selectedCategory.Id, project.Id);
+
+        if (success)
+        {
+            await FetchCategory();
             StateHasChanged();
         }
     }
