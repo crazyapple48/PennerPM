@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.container:hover {
+    border-bottom: 2px solid var(--primary-border);
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.icon:hover {
+    cursor: pointer;
+    color: var(--primary-hover-background);
+}
