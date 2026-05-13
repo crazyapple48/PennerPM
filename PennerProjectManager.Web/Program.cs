@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddHttpClient("WebAPI", client => client.BaseAddress = new Uri("http://localhost:5094"));
 
 builder.Services.AddScoped<ICategoryClientService, CategoryClientService>();
+builder.Services.AddScoped<AppState>();
 
 var app = builder.Build();
 

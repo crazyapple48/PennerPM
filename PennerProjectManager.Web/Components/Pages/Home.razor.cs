@@ -11,6 +11,8 @@ public partial class Home : ComponentBase
     private ProjectModel? _selectedProject;
 
     [Inject] public required ICategoryClientService CategoryClientService { get; set; }
+    [Inject] public required NavigationManager NavigationManager { get; set; }
+    [Inject] public required AppState AppState { get; set; }
 
     [Parameter] public int? CategoryId { get; set; }
 
@@ -38,6 +40,18 @@ public partial class Home : ComponentBase
             _selectedProject = project;
             _isProjectSelected = true;
             StateHasChanged();
+        }
+    }
+
+    private async Task DeleteCategory(CategoryModel category)
+    {
+        Console.WriteLine("Delete button clicked");
+        var success = await CategoryClientService.DeleteCategoryById(category.Id);
+
+        if (success)
+        {
+            await AppState.RefreshCategoriesAsync();
+            NavigationManager.NavigateTo("/");
         }
     }
 

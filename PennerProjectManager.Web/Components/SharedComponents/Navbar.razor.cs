@@ -4,18 +4,32 @@ using PennerProjectManager.Web.Services;
 
 namespace PennerProjectManager.Web.Components.SharedComponents;
 
-public partial class Navbar(ICategoryClientService client) : ComponentBase
+public partial class Navbar(ICategoryClientService client) : ComponentBase, IDisposable
 {
     private IEnumerable<CategoryModel> _categories = [];
 
-    private async Task FetchCategories()
+    [Inject] public required AppState AppState { get; set; }
+
+    public void Dispose()
     {
-        _categories = await client.GetAllCategories() ?? [];
+        AppState.OnChange -= StateHasChanged;
     }
+
 
     protected override async Task OnInitializedAsync()
     {
-        await FetchCategories();
-        await base.OnInitializedAsync();
+        await AppState.RefreshCategoriesAsync();
+
+        _categories = AppState.Categories;
+    }
+
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += async () =>
+        {
+            _categories = AppState.Categories;
+            Console.WriteLine("State changed" + " " + _categories.Count());
+            await InvokeAsync(StateHasChanged);
+        };
     }
 }
