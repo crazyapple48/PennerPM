@@ -27,7 +27,7 @@ else
         {
             <div class="project-container">
                 <div class="project-header">
-                    <div onclick="@(() => OnProjectSelected(project))">
+                    <div class="project-name" @onclick="() => OnProjectSelected(project)">
                         <h2>@project.Name</h2>
                     </div>
                     <div class="button-group">
