@@ -68,6 +68,20 @@
     justify-content: space-between;
 }
 
+.delete-category-btn {
+    width: 2rem;
+    height: 2rem;
+    color: red;
+}
+
+.delete-category-btn:hover {
+    color: rgb(215, 0, 0);
+}
+
+.delete-category-btn:active {
+    color: rgb(150, 0, 0);
+}
+
 .project-name {
     flex-grow: 1;
 }
