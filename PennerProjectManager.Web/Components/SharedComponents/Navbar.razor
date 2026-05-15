@@ -1,3 +1,4 @@
+@using PennerProjectManager.Web.Components.Dialogs
 @rendermode InteractiveServer
 
 <div class="container">
@@ -21,6 +22,14 @@
             {
                 <NavButton Text="@category.Name" Href="@category.Id.ToString()"/>
             }
+        }
+        <button @onclick="() => _showCreateCategoryDialog = true">+ New Category</button>
+
+        @if (_showCreateCategoryDialog)
+        {
+            <CreateCategoryDialog OnSuccess="CloseCreateCategoryDialog"
+                                  OnCancelClick="CloseCreateCategoryDialog"
+            />
         }
     </div>
 </div>

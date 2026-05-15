@@ -4,9 +4,10 @@ using PennerProjectManager.Web.Services;
 
 namespace PennerProjectManager.Web.Components.SharedComponents;
 
-public partial class Navbar(ICategoryClientService client) : ComponentBase, IDisposable
+public partial class Navbar : ComponentBase, IDisposable
 {
     private IEnumerable<CategoryModel> _categories = [];
+    private bool _showCreateCategoryDialog;
 
     [Inject] public required AppState AppState { get; set; }
 
@@ -31,5 +32,10 @@ public partial class Navbar(ICategoryClientService client) : ComponentBase, IDis
             Console.WriteLine("State changed" + " " + _categories.Count());
             await InvokeAsync(StateHasChanged);
         };
+    }
+
+    private void CloseCreateCategoryDialog()
+    {
+        _showCreateCategoryDialog = false;
     }
 }

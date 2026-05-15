@@ -1,0 +1,18 @@
+/* DialogShell.razor */
+.dialog-backdrop {
+    position: fixed; /* takes it out of NavBar's layout flow */
+    inset: 0; /* covers the entire viewport */
+    z-index: 1000; /* sits on top of everything */
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialog {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    width: 500px; /* or whatever size you want */
+    max-width: 90vw; /* responsive safety net */
+}

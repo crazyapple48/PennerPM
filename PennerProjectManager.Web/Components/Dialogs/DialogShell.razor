@@ -1,0 +1,14 @@
+@rendermode InteractiveServer
+
+<div class="dialog-backdrop">
+    <div class="dialog">
+        <h2>@Title</h2>
+
+        @ChildContent
+
+        <div class="dialog-actions">
+            <button @onclick="OnCancelClick">Cancel</button>
+            <button @onclick="OnConfirm">@ConfirmLabel</button>
+        </div>
+    </div>
+</div>
