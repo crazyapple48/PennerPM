@@ -6,6 +6,7 @@
     width: 15vw;
     gap: 1rem;
     background: var(--primary-background);
+    padding-bottom: 25px;
 }
 
 .title-container {
@@ -19,6 +20,7 @@
 
 .navigation-container {
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     align-items: flex-start;
     padding: 0 0 1rem 0;
@@ -39,4 +41,20 @@
     font-size: .85rem;
     color: var(--tertiary-foreground);
     margin-left: 1rem;
+}
+
+.new-dialog-button {
+    background-color: var(--primary-background);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    color: var(--primary-foreground);
+}
+
+.new-dialog-button:hover {
+    background-color: var(--secondary-border);
+}
+
+.new-dialog-button:active {
+    background-color: var(--primary-border);
 }

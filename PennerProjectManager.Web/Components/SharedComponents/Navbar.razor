@@ -23,7 +23,6 @@
                 <NavButton Text="@category.Name" Href="@category.Id.ToString()"/>
             }
         }
-        <button @onclick="() => _showCreateCategoryDialog = true">+ New Category</button>
 
         @if (_showCreateCategoryDialog)
         {
@@ -32,4 +31,6 @@
             />
         }
     </div>
+    
+    <button class="new-dialog-button" @onclick="() => _showCreateCategoryDialog = true">+ New Category</button>
 </div>
