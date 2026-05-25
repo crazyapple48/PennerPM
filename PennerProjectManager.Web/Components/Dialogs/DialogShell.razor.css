@@ -3,16 +3,52 @@
     position: fixed; /* takes it out of NavBar's layout flow */
     inset: 0; /* covers the entire viewport */
     z-index: 1000; /* sits on top of everything */
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(15, 15, 15, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .dialog {
-    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-background);
     border-radius: 8px;
     padding: 2rem;
     width: 500px; /* or whatever size you want */
     max-width: 90vw; /* responsive safety net */
+    max-height: 75vh;
+}
+
+.dialog-content {
+    flex-grow: 1;
+}
+
+.dialog-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.dialog-cancel {
+    background: rgba(180, 100, 100, 0.8);
+    color: var(--primary-foreground);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.dialog-confirm {
+    background: rgba(100, 180, 100, 0.8);
+    color: var(--primary-foreground);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
 }

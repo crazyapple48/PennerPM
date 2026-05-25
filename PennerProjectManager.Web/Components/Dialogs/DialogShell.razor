@@ -4,11 +4,13 @@
     <div class="dialog">
         <h2>@Title</h2>
 
-        @ChildContent
+        <div class="dialog-content">
+            @ChildContent
+        </div>
 
         <div class="dialog-actions">
-            <button @onclick="OnCancelClick">Cancel</button>
-            <button @onclick="OnConfirm">@ConfirmLabel</button>
+            <button @onclick="OnCancelClick" class="dialog-cancel">Cancel</button>
+            <button @onclick="OnConfirm" class="dialog-confirm">@ConfirmLabel</button>
         </div>
     </div>
 </div>
