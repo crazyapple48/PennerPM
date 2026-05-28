@@ -41,4 +41,11 @@ public class CategoryClientService : ICategoryClientService
 
         return result.IsSuccessStatusCode;
     }
+
+    public async Task<bool> UpdateCategoryById(CategoryModel category)
+    {
+        var result = await _httpClient.PutAsJsonAsync($"categories/{category.Id}", category);
+
+        return result.IsSuccessStatusCode;
+    }
 }

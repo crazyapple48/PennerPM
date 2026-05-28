@@ -9,6 +9,8 @@ public interface ICategoryClientService
 
     Task<bool> CreateCategory(CategoryModel category);
 
+    Task<bool> UpdateCategoryById(CategoryModel category);
+
     Task<bool> DeleteCategoryById(int id);
 
     Task<bool> DeleteProjectFromCategoryById(int categoryId, int projectId);

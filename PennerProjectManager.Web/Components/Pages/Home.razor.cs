@@ -9,6 +9,7 @@ public partial class Home : ComponentBase
     private bool _isProjectSelected;
     private CategoryModel? _selectedCategory;
     private ProjectModel? _selectedProject;
+    private bool _showCreateProjectDialog;
 
     [Inject] public required ICategoryClientService CategoryClientService { get; set; }
     [Inject] public required NavigationManager NavigationManager { get; set; }
@@ -66,5 +67,10 @@ public partial class Home : ComponentBase
             await FetchCategory();
             StateHasChanged();
         }
+    }
+
+    private void CloseCreateProjectDialog()
+    {
+        _showCreateProjectDialog = false;
     }
 }

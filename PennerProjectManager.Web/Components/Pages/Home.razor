@@ -1,5 +1,6 @@
 ﻿@page "/"
 @page "/{CategoryId:int}"
+@using PennerProjectManager.Web.Components.Dialogs
 @rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
@@ -20,7 +21,7 @@ else
             <i class="fa-solid fa-trash"></i>
         </div>
         <h1 class="header">@_selectedCategory.Name</h1>
-        <button class="add-project-button">
+        <button class="add-project-button" @onclick="() => _showCreateProjectDialog = true">
             <i class="fa-solid fa-plus"></i>
         </button>
     </div>
@@ -50,4 +51,12 @@ else
             </div>
         }
     </div>
+}
+@if (_showCreateProjectDialog)
+{
+    if (_selectedCategory is not null)
+    {
+        <CreateProjectDialog OnSuccess="CloseCreateProjectDialog" OnCancelClick="CloseCreateProjectDialog"
+                             Category="@_selectedCategory"/>
+    }
 }
