@@ -10,6 +10,7 @@ public partial class Home : ComponentBase
     private CategoryModel? _selectedCategory;
     private ProjectModel? _selectedProject;
     private bool _showCreateProjectDialog;
+    private bool _showCreateTaskDialog;
 
     [Inject] public required ICategoryClientService CategoryClientService { get; set; }
     [Inject] public required NavigationManager NavigationManager { get; set; }
@@ -72,5 +73,10 @@ public partial class Home : ComponentBase
     private void CloseCreateProjectDialog()
     {
         _showCreateProjectDialog = false;
+    }
+
+    private void CloseCreateTaskDialog()
+    {
+        _showCreateTaskDialog = false;
     }
 }

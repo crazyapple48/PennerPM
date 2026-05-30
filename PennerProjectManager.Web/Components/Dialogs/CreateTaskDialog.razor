@@ -1,5 +1,3 @@
-<h3>CreateTaskDialog</h3>
-
-@code {
-    
-}
+<DialogShell Title="Create Project" OnCancelClick="OnCancelClick" OnConfirm="HandleSubmit">
+    <TextField @bind-Value="TaskName" PlaceholderText="Project Name"/>
+</DialogShell>

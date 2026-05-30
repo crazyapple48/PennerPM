@@ -132,3 +132,16 @@
     background-color: var(--primary-hover-background);
     color: var(--primary-foreground);
 }
+
+.add-task-button {
+    border-radius: 1rem;
+    border: none;
+    width: 1rem;
+    height: 1rem;
+    padding: 0.25rem 0.25rem;
+}
+
+.add-task-button:hover {
+    background-color: var(--primary-hover-background);
+    color: var(--primary-foreground);
+}

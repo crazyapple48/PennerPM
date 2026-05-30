@@ -47,6 +47,9 @@ else
                     {
                         <TaskListCheckbox TaskName="@task.Name"></TaskListCheckbox>
                     }
+                    <button class="add-task-button" @onclick="() => _showCreateTaskDialog = true">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
             </div>
         }
@@ -58,5 +61,13 @@ else
     {
         <CreateProjectDialog OnSuccess="CloseCreateProjectDialog" OnCancelClick="CloseCreateProjectDialog"
                              Category="@_selectedCategory"/>
+    }
+}
+@if (_showCreateTaskDialog)
+{
+    if (_selectedCategory is not null && _selectedProject is not null)
+    {
+        <CreateTaskDialog OnSuccess="CloseCreateTaskDialog" OnCancelClick="CloseCreateTaskDialog"
+                          Project="@_selectedProject" Category="@_selectedCategory"/>
     }
 }

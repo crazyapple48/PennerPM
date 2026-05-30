@@ -12,13 +12,14 @@ public partial class CreateProjectDialog : ComponentBase
     [Parameter] public EventCallback OnSuccess { get; set; }
 
     [Inject] public required ICategoryClientService CategoryClientService { get; set; }
-    [Inject] public required AppState AppState { get; set; }
 
-    private async void HandleSubmit()
+    private async Task HandleSubmit()
     {
         Category.Projects?.Add(new ProjectModel { Name = ProjectName });
 
         var result = await CategoryClientService.UpdateCategoryById(Category);
+
+        if (!result) return;
         await OnSuccess.InvokeAsync();
     }
 }
