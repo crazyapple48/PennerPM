@@ -47,9 +47,12 @@ else
                     {
                         <TaskListCheckbox TaskName="@task.Name"></TaskListCheckbox>
                     }
-                    <button class="add-task-button" @onclick="() => _showCreateTaskDialog = true">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
+                    <div class="add-task-button-container">
+                        <div class="add-task-button" @onclick="() => _showCreateTaskDialog = true">
+                            <i class="fa-solid fa-plus plus-sign"></i>
+                            <p>Add Task</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         }
